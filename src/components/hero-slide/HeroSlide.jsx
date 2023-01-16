@@ -13,7 +13,7 @@ import './hero-slide.scss';
 import { useHistory } from 'react-router';
 
 const HeroSlide = () => {
-
+    
     SwiperCore.use([Autoplay]);
 
     const [movieItems, setMovieItems] = useState([]);
