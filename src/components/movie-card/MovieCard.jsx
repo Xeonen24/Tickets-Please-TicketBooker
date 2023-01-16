@@ -23,6 +23,7 @@ const MovieCard = props => {
                 <Button>
                     <i className="bx bx-play"></i>
                 </Button>
+                <p>{item.overview.substring(0, 100)}...</p>
             </div>
             <h3>{item.title || item.name}</h3>
         </Link>
