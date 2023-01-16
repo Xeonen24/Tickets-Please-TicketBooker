@@ -6,9 +6,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 160%;
-    border-radius: $border-radius;
+    border-radius: 10px;
     margin-bottom: 1rem;
+    transition: all 0.3s ease-out;
 
+    &:hover{
+        transform: scale(1.05);
+    }
     .btn {
         position: absolute;
         top: 50%;
@@ -16,7 +20,9 @@
         transform: translate(-50%, -50%) scale(0);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
+    .viewMore{
+        font-size: 15px;
+    }
     &::before {
         content: "";
         position: absolute;
@@ -27,12 +33,12 @@
         background-color: $black;
         opacity: 0;
         transition: opacity 0.3s ease;
-        border-radius: $border-radius;
+        border-radius: 10px;
     }
 
     @media (hover: hover) and (pointer: fine) {
         &:hover::before {
-            opacity: 0.8;
+            opacity: 0.5;
         }
 
         &:hover .btn {

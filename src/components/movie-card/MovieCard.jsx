@@ -21,7 +21,7 @@ const MovieCard = props => {
         <Link to={link}>
             <div className="movie-card" style={{backgroundImage: `url(${bg})`}}>
                 <Button>
-                    <i className="bx bx-play"></i>
+                    <span className="viewMore">View More</span>
                 </Button>
                 <p>{item.overview.substring(0, 100)}...</p>
             </div>
