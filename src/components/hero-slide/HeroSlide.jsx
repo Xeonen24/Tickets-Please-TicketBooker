@@ -13,7 +13,7 @@ import './hero-slide.scss';
 import { useHistory } from 'react-router';
 
 const HeroSlide = () => {
-
+    
     SwiperCore.use([Autoplay]);
 
     const [movieItems, setMovieItems] = useState([]);
@@ -23,7 +23,7 @@ const HeroSlide = () => {
             const params = {page: 1}
             try {
                 const response = await tmdbApi.getMoviesList(movieType.popular, {params});
-                setMovieItems(response.results.slice(1, 4));
+                setMovieItems(response.results.slice(0, 10));
                 console.log(response);
             } catch {
                 console.log('error');
@@ -39,7 +39,8 @@ const HeroSlide = () => {
                 grabCursor={true}
                 spaceBetween={0}
                 slidesPerView={1}
-                // autoplay={{delay: 3000}}
+                autoplay={{delay: 5000}}
+                loop={true}
             >
                 {
                     movieItems.map((item, i) => (
