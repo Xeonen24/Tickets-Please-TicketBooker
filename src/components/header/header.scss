@@ -1,5 +1,8 @@
 @use "../../scss/" as *;
 
+a:hover{
+    color: rgb(153, 226, 42);
+}
 .logo {
     font-size: 2.5rem;
     font-weight: 600;
@@ -35,11 +38,11 @@
         @include flex(center, space-between);
         height: 100%;
         padding: 0 2rem;
-
         @include mobile {
             justify-content: center;
         }
     }
+    
 
     &__nav {
         @include flex(center, unset);
@@ -62,8 +65,8 @@
                 transform: translateX(-50%);
                 width: 0;
                 transition: width 0.5s ease;
-                height: 2px;
-                background-color: $main-color;
+                height: 2px;  
+                background-color: rgb(153, 226, 42);;
             }
 
             &.active::after,
