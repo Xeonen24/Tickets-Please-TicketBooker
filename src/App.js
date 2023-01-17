@@ -9,11 +9,15 @@ import Footer from './components/footer/Footer';
 
 import Routes from './config/Routes';
 
+import Loading from './components/loading/loading'
+
 function App() {
+    
     return (
         <BrowserRouter>
             <Route render={props => (
-                <>
+                <>  
+                    <Loading />
                     <Header {...props}/>
                     <Routes/>
                     <Footer/>
