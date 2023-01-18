@@ -1,37 +1,10 @@
 import React, { useRef, useEffect } from 'react';
-
-import { Link, useLocation } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import './header.scss';
-
 import logo from '../../assets/tmovie.png';
 
-const headerNav = [
-    {
-        display: 'Home',
-        path: '/'
-    },
-    {
-        display: 'Movies',
-        path: '/movie'
-    },
-    {
-        display: 'TV Series',
-        path: '/tv'
-    },
-    {
-        display: 'LOGIN',
-        path: '/login'
-    }
-];
-
 const Header = () => {
-
-    const { pathname } = useLocation();
     const headerRef = useRef(null);
-
-    const active = headerNav.findIndex(e => e.path === pathname);
-
     useEffect(() => {
         const shrinkHeader = () => {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -54,19 +27,20 @@ const Header = () => {
                     <Link to="/">CinemaSeatsDirect</Link>
                 </div>
                 <ul className="header__nav">
-                    {
-                        headerNav.map((e, i) => (
-                            <li key={i} className={`${i === active ? 'active' : ''}`}>
-                                <Link to={e.path}>
-                                    {e.display}
-                                </Link>
-                            </li>
-                        ))
-                    }
+                    <li>
+                        <Link to="/movie" style={{textDecoration: "none"}}>Movies</Link>
+                    </li>
+                    <li>
+                        <Link to="/tv" style={{textDecoration: "none"}}>TV Series</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">LOGIN</Link>
+                    </li>
                 </ul>
             </div>
         </div>
     );
+
 }
 
 export default Header;

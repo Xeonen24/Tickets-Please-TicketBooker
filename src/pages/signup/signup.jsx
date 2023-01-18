@@ -5,8 +5,7 @@ import "./signup.css";
 
 const Signup = () => {
 	const [data, setData] = useState({
-		firstName: "",
-		lastName: "",
+		username: "",
 		email: "",
 		password: "",
 	});
@@ -22,7 +21,7 @@ const Signup = () => {
 		try {
 			const url = "http://localhost:5000/api/users";
 			const { data: res } = await axios.post(url, data);
-			history.push("/login");
+			history.push("/signup");
 			console.log(res.message);
 		} catch (error) {
 			if (
@@ -51,19 +50,10 @@ const Signup = () => {
 						<h1>Create Account</h1>
 						<input
 							type="text"
-							placeholder="First Name"
-							name="firstName"
+							placeholder="Username"
+							name="username"
 							onChange={handleChange}
-							value={data.firstName}
-							required
-							className="input"
-						/>
-						<input
-							type="text"
-							placeholder="Last Name"
-							name="lastName"
-							onChange={handleChange}
-							value={data.lastName}
+							value={data.username}
 							required
 							className="input"
 						/>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link,useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./login.css";
 
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "http://localhost:5050/api/auth";
+			const url = "http://localhost:5000/api/auth";
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.data);
 			window.location = "/";
