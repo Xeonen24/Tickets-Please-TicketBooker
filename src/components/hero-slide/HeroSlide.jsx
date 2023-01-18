@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useHistory, useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Button, { OutlineButton } from '../button/Button';

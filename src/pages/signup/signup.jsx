@@ -1,40 +1,38 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { toast} from 'react-toastify';
 import "./signup.css";
 
 const Signup = () => {
-	const [data, setData] = useState({
-		username: "",
-		email: "",
-		password: "",
-	});
-	const [error, setError] = useState("");
-	const history = useHistory();
-
-	const handleChange = ({ currentTarget: input }) => {
-		setData({ ...data, [input.name]: input.value });
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const url = "http://localhost:5000/api/users";
-			const { data: res } = await axios.post(url, data);
-			history.push("/signup");
-			console.log(res.message);
-		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-			}
-		}
-	};
-
-	return (
+    const [values, setValues] = useState({
+        username: '',
+        email: '',
+        password:''
+    });
+    const {username, email, password} = values;
+    const handleChange = name => (e) =>{
+        setValues({...values, [name]: e.target.value});
+    }
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        try{
+            const {data} = await axios.post('http://localhost:5000/api/signup', {
+                username,
+                email,
+                password
+            });
+            console.log(data);
+            if  (data.success === true){
+                setValues({username: '', email: '', password:''});
+                toast.success("Sign up successfully, please Login!");
+            }
+        } catch(err){
+            console.log(err.response.data.error);
+            toast.error(err.response.data.error);
+        }
+    }
+    return (
 		<div className="signup_container">
 			<div className="signup_form_container">
 				<div className="left">
@@ -52,8 +50,8 @@ const Signup = () => {
 							type="text"
 							placeholder="Username"
 							name="username"
-							onChange={handleChange}
-							value={data.username}
+							onChange={handleChange("username")}
+							value={username}
 							required
 							className="input"
 						/>
@@ -61,8 +59,8 @@ const Signup = () => {
 							type="email"
 							placeholder="Email"
 							name="email"
-							onChange={handleChange}
-							value={data.email}
+							onChange={handleChange("email")}
+							value={email}
 							required
 							className="input"
 						/>
@@ -70,12 +68,11 @@ const Signup = () => {
 							type="password"
 							placeholder="Password"
 							name="password"
-							onChange={handleChange}
-							value={data.password}
+							onChange={handleChange("password")}
+							value={password}
 							required
 							className="input"
 						/>
-						{error && <div className="error_msg">{error}</div>}
 						<button type="submit" className="green_btn">
 							Sign Up
 						</button>

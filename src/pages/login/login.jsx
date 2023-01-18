@@ -1,46 +1,61 @@
 import { useState } from "react";
 import axios from "axios";
+import { toast} from 'react-toastify';
 import { Link } from "react-router-dom";
 import "./login.css";
 
 const Login = () => {
-	const [data, setData] = useState({ email: "", password: "" });
-	const [error, setError] = useState("");
 
-	const handleChange = ({ currentTarget: input }) => {
-		setData({ ...data, [input.name]: input.value });
-	};
+    const [values, setValues] = useState({
+        username: 'xeeee',
+        password:'asdfgh123'
+ 
+    });
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const url = "http://localhost:5000/api/auth";
-			const { data: res } = await axios.post(url, data);
-			localStorage.setItem("token", res.data);
-			window.location = "/";
-		} catch (error) {
-			if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-			}
-		}
-	};
+    const { username, password} = values;
 
-	return (
+    const handleChange = username => (e) =>{
+        setValues({...values, [username]: e.target.value});
+    }
+
+
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        try{
+            const {data} = await axios.post('http://localhost:5000/api/signin', {
+                username,
+                password
+            });
+
+            console.log(data);
+
+            if  (data.success === true){
+                setValues({ username: '', password:''});
+                toast.success("Log In successfully");
+                localStorage.setItem("token", JSON.stringify(data))
+				window.location = "/";
+            }
+            
+
+        } catch(err){
+            console.log(err.response.data.error);
+            toast.error(err.response.data.error);
+         
+        }
+    }
+    
+    return (
 		<div className="login_container">
 			<div className="login_form_container">
 				<div className="left">
 					<form className="form_container" onSubmit={handleSubmit}>
 						<h1>Login to Your Account</h1>
 						<input
-							type="email"
-							placeholder="Email"
-							name="email"
-							onChange={handleChange}
-							value={data.email}
+							type="text"
+							placeholder="Username"
+							name="username"
+							onChange={handleChange("username")}
+							value={username}
 							required
 							className="input"
 						/>
@@ -48,12 +63,11 @@ const Login = () => {
 							type="password"
 							placeholder="Password"
 							name="password"
-							onChange={handleChange}
-							value={data.password}
+							onChange={handleChange("password")}
+							value={password}
 							required
 							className="input"
 						/>
-						{error && <div className="error_msg">{error}</div>}
 						<button type="submit" className="green_btn">
 							Sing In
 						</button>
@@ -70,6 +84,7 @@ const Login = () => {
 			</div>
 		</div>
 	);
-};
+}
 
-export default Login;
+export default Login
+
