@@ -1,44 +1,48 @@
-import axios from "axios";
-import React ,{useEffect,useState} from 'react';
-import './loading.scss';
-import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from "react-redux";
+import { Paper, Box, LinearProgress, Toolbar } from "@mui/material";
+import { useEffect, useState } from "react";
+import Logo from "./logo";
 
-const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: 'red',
-  },
-}));
-const Loading = () => {
-  
-  const [post,setPost]= useState(null)
-  const [loading,setLoading]= useState(false);
-  
-    const fetchFunc = async () => {
-        try{
-            const data = await axios
-        .get("https://api.themoviedb.org/3/4e44d9029b1270a757cddc766a1bcb63")
-        .then(res =>{
-            const {body}=Response
-            setPost(body)
-        })
-        setLoading(true);
-        }
-        catch (e) {
-            console.log(e);
-        }
-    };
-    useEffect(() => {
-        fetchFunc();
-        },[]);
+const GlobalLoading = () => {
+  const { globalLoading } = useSelector((state) => state.globalLoading);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (globalLoading) {
+      setIsLoading(false);
+    } else {
+      setTimeout(() => {
+        setIsLoading(true);
+      }, 1000);
+    }
+  }, [globalLoading]);
+
+
   return (
-    <div className="sweetloading">
-      {loading ? () : }
-        
-        
-        />
-    </div>
+    <>
+      <Paper sx={{
+        opacity: isLoading ? 1 : 0,
+        pointerEvents: "none",
+        transition: "all .3s ease",
+        position: "fixed",
+        width: "100vw",
+        height: "100vh",
+        zIndex: 999
+      }}>
+        <Toolbar />
+        <LinearProgress />
+        <Box sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)"
+        }}>
+          <Logo />
+        </Box>
+      </Paper>
+    </>
   );
-}
+};
 
-export default Loading;
+export default GlobalLoading;
