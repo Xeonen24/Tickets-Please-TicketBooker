@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+import { useHistory, useNavigate } from 'react-router-dom';
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import Button, { OutlineButton } from '../button/Button';
 import Modal, { ModalContent } from '../modal/Modal';
-
 import tmdbApi, { category, movieType } from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
-
 import './hero-slide.scss';
-import { useHistory } from 'react-router';
 
 const HeroSlide = () => {
     
@@ -61,7 +57,7 @@ const HeroSlide = () => {
 
 const HeroSlideItem = props => {
 
-    let hisrory = useHistory();
+    let history = useHistory();
 
     const item = props.item;
 
@@ -92,7 +88,7 @@ const HeroSlideItem = props => {
                     <h2 className="title">{item.title}</h2>
                     <div className="overview">{item.overview}</div>
                     <div className="btns">
-                        <Button onClick={() => hisrory.push('/movie/' + item.id)}>
+                        <Button onClick={() => history.push('/movie/' + item.id)}>
                             Watch now
                         </Button>
                         <OutlineButton onClick={setModalActive}>
