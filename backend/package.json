@@ -15,10 +15,19 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+<<<<<<< HEAD
     "express": "^4.17.1",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.13.9",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.14"
+=======
+    "express": "^4.17.2",
+    "joi": "^17.5.0",
+    "joi-password-complexity": "^5.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.1.2",
+    "nodemon": "^2.0.15"
+>>>>>>> 6c4c0540e8774ccfb4f1d4e1137301f9fcb5adb7
   }
 }
