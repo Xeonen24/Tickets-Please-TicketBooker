@@ -11,8 +11,6 @@ import Logout from './pages/logout/logout';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import Detail from './pages/detail/Detail';
-import {Loading} from './components/loading/loading';
-import { BeatLoader } from 'react-spinners'
 import  ClipLoader from 'react-spinners/ClipLoader'
 import {initialState,reduce} from './reducer/UseReducer';
 
