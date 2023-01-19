@@ -1,48 +1,23 @@
-import { useSelector } from "react-redux";
-import { Paper, Box, LinearProgress, Toolbar } from "@mui/material";
-import { useEffect, useState } from "react";
-import Logo from "./logo";
+import React, { Children, useState } from 'react';
+import { render } from 'react-dom';
+import LoadingScreen from './LoadingScreen';
 
-const GlobalLoading = () => {
-  const { globalLoading } = useSelector((state) => state.globalLoading);
+const Loading = (Children) => {
+  const [loading, setLoading] = useState(true);
 
-  const [isLoading, setIsLoading] = useState(false);
+  setTimeout(() => {
+    setLoading(false);
+  }, 1500);
 
-  useEffect(() => {
-    if (globalLoading) {
-      setIsLoading(false);
-    } else {
-      setTimeout(() => {
-        setIsLoading(true);
-      }, 1000);
-    }
-  }, [globalLoading]);
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
-
-  return (
-    <>
-      <Paper sx={{
-        opacity: isLoading ? 1 : 0,
-        pointerEvents: "none",
-        transition: "all .3s ease",
-        position: "fixed",
-        width: "100vw",
-        height: "100vh",
-        zIndex: 999
-      }}>
-        <Toolbar />
-        <LinearProgress />
-        <Box sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)"
-        }}>
-          <Logo />
-        </Box>
-      </Paper>
-    </>
-  );
+  return Children;
 };
 
-export default GlobalLoading;
+const renderApp = () => {
+  render(<Loading />, document.getElementById('root'));
+};
+
+export default 

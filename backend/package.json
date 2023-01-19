@@ -20,7 +20,6 @@
     "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.1.2",
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
 }

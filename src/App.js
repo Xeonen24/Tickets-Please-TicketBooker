@@ -10,31 +10,31 @@ import Signup from './pages/signup/signup';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import Detail from './pages/detail/Detail';
-
-// import GlobalLoading from './components/loading/Loading'
+import Loading from './components/loading/Loading';
 
 function App() {
-    
     return (
-        <>
         <BrowserRouter>
             <Route render={props => (
-                <>    
+                <>
+                    <Loading />
                     <Header {...props}/>
                     <Switch>
-                    <Route path="/login" component={Login} />
-                    <Route path="/signup" component={Signup} />
-                            <Route path='/:category/search/:keyword'component={Catalog}/>
-                             <Route path='/:category/:id' component={Detail}/>
-                            <Route path='/:category' component={Catalog}/>
-                            <Route path='/' exact component={Home}/>
+                        <Route path="/login" component={Login} />
+                        <Route path="/signup" component={Signup} />
+                        <Route path='/:category/search/:keyword'component={Catalog}/>
+                        <Route path='/:category/:id' component={Detail}/>
+                        <Route path='/:category' component={Catalog}/>
+                        <Route path='/' exact component={Home}/>
                     </Switch>
-                <Footer/>
+                    <Footer/>
+                    
                 </>
-                
             )}/>
         </BrowserRouter>
-     </>
     );
 }
+
 export default App;
+
+
