@@ -82,3 +82,10 @@ iframe {
 .section__header {
     @include flex(center, space-between);
 }
+.spinner{
+position: fixed;
+  top: 43%;
+  left: 48%;
+  margin-top: -50px;
+  margin-left: -50px;
+}
