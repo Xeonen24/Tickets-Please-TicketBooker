@@ -1,9 +1,12 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
+import axios from "axios";
+import { toast} from 'react-toastify';
 import './header.scss';
 import logo from '../../assets/tmovie.png';
 
 const Header = () => {
+    let history = useHistory();
     const headerRef = useRef(null);
     useEffect(() => {
         const shrinkHeader = () => {
@@ -18,6 +21,18 @@ const Header = () => {
             window.removeEventListener('scroll', shrinkHeader);
         };
     }, []);
+    const logOut = () =>{
+        axios.get('http://localhost:5000/api/logout')
+        .then(result =>{
+            toast.success('Log out successfully');
+            localStorage.removeItem('token');
+            history.push('/');
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+
+    }
 
     return (
         <div ref={headerRef} className="header">
@@ -34,7 +49,10 @@ const Header = () => {
                         <Link to="/tv" style={{textDecoration: "none"}}>TV Series</Link>
                     </li>
                     <li>
-                        <Link to="/login">LOGIN</Link>
+                        <Link to="/login">Sign in/up</Link>
+                    </li>
+                    <li>
+                        <Link to="" onClick={logOut} >Logout</Link>
                     </li>
                 </ul>
             </div>

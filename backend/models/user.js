@@ -1,30 +1,52 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
-const Joi = require("joi");
-const passwordComplexity = require("joi-password-complexity");
 
 const userSchema = new mongoose.Schema({
-	username: { type: String, required: true },
-	email: { type: String, required: true },
-	password: { type: String, required: true },
+   username: {
+       type: String,
+       trim: true,
+       required : [true, 'Enter your username'],
+       maxlength: 32
+   },
+   email: {
+       type: String,
+       trim: true,
+       required : [true, 'Enter a E-mail'],
+       unique: true,
+       match: [
+           /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+           'Enter your valid email address'
+       ]
+   },
+   password: {
+       type: String,
+       trim: true,
+       required : [true, 'Please add a Password'],
+       minlength: [6, 'password must have at least six(6) characters'],
+       match: [
+           /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]+$/,
+           'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and a special characters'
+       ]
+   },
+
+}, {timestamps: true});
+
+userSchema.pre('save', async function(next){
+   if(!this.isModified('password')){
+       next()
+   }
+   this.password = await bcrypt.hash(this.password, 6);
 });
 
-userSchema.methods.generateAuthToken = function () {
-	const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
-		expiresIn: "7d",
-	});
-	return token;
-};
+userSchema.methods.comparePassword = async function(yourPassword){
+    return await bcrypt.compare(yourPassword, this.password);
+}
 
-const User = mongoose.model("user", userSchema);
+userSchema.methods.jwtGenerateToken = function(){
+    return jwt.sign({id: this.id}, process.env.JWT_SECRET, {
+        expiresIn: 3600
+    });
+}
 
-const validate = (data) => {
-	const schema = Joi.object({
-		username: Joi.string().required().label("Username"),
-		email: Joi.string().email().required().label("Email"),
-		password: passwordComplexity().required().label("Password"),
-	});
-	return schema.validate(data);
-};
-
-module.exports = { User, validate };
+module.exports = mongoose.model("User", userSchema);
