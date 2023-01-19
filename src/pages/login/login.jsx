@@ -1,23 +1,22 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import axios from "axios";
 import { toast} from 'react-toastify';
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import "./login.css";
-
+import { UserContext } from "../../App";
 const Login = () => {
 
+	const {state, dispatch} = useContext(UserContext)
+	let history = useHistory()
     const [values, setValues] = useState({
         username: 'xeeee',
         password:'asdfgh123'
- 
     });
 
     const { username, password} = values;
-
     const handleChange = username => (e) =>{
         setValues({...values, [username]: e.target.value});
     }
-
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -26,21 +25,19 @@ const Login = () => {
                 username,
                 password
             });
-
             console.log(data);
-
             if  (data.success === true){
                 setValues({ username: '', password:''});
                 toast.success("Log In successfully");
                 localStorage.setItem("token", JSON.stringify(data))
-				window.location = "/";
+				localStorage.setItem("isLoggedIn", true);
+				dispatch({type:"USER",payload:true})
+				history.push('/')
+				window.location.reload();
             }
-            
-
         } catch(err){
             console.log(err.response.data.error);
             toast.error(err.response.data.error);
-         
         }
     }
     
