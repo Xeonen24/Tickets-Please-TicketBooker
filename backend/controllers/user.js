@@ -67,5 +67,6 @@ exports.singleUser = async (req, res, next)=>{
         })
     } catch (error) {
         next(error)
-    }s
+    }
 }
+

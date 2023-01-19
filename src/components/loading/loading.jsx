@@ -1,23 +1,26 @@
-import React, { Children, useState } from 'react';
-import { render } from 'react-dom';
-import LoadingScreen from './LoadingScreen';
+import React, { useEffect, useState } from 'react'
+import { BeatLoader } from 'react-spinners'
+import  ClipLoader from 'react-spinners/ClipLoader'
 
-const Loading = (Children) => {
-  const [loading, setLoading] = useState(true);
+function Loading() {
+    const [load,setLoading] = useState(false)
+    useEffect(() =>{
+        setLoading(true)
+        setTimeout(() =>{
+            setLoading(false)
+        },2000)
+    },[])
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 1500);
+  return (
+    <>
+    {
+            load?
+            <ClipLoader color={'#D00218'} loading={BeatLoader} size={150}/>
+            :
+            <></>
+        }
+     </>
+  )
+}
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
-  return Children;
-};
-
-const renderApp = () => {
-  render(<Loading />, document.getElementById('root'));
-};
-
-export default 
+export default Loading

@@ -4,11 +4,22 @@ import './header.scss';
 import logo from '../../assets/tmovie.png';
 import { UserContext } from "../../App";
 import {loggedIN} from '../../App'
+import axios from 'axios';
+
+
 
 const Header = () => {
     const {state,dispatch} = useContext(UserContext)
     const headerRef = useRef(null);
-
+    const getUser = () =>{
+        axios.get('http://localhost:5000/api/user/:id')
+            .then(response => {
+                this.setState({
+                    user: response.data.user
+                });
+            })
+            .catch(err => console.log(err));
+    }
     const NavMenu = () =>{
         if(state,loggedIN){
             return(
@@ -20,7 +31,7 @@ const Header = () => {
                  <Link to="/tv" style={{textDecoration: "none"}}>TV Series</Link>
                 </li>
                 <li>
-                <Link to="/logout">Logout</Link>
+                <Link to="/logout"></Link>
                 </li>
                 </>
             )
