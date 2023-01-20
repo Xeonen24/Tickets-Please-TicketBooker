@@ -1,38 +1,66 @@
-import React, { useRef, useEffect,useContext } from 'react';
+import React, { useRef, useEffect,useContext,useState } from 'react';
 import { Link } from 'react-router-dom';
 import './header.scss';
 import logo from '../../assets/tmovie.png';
 import { UserContext } from "../../App";
 import {loggedIN} from '../../App'
 import axios from 'axios';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
+
 
 
 
 const Header = () => {
+
     const {state,dispatch} = useContext(UserContext)
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+  
     const headerRef = useRef(null);
-    const getUser = () =>{
-        axios.get('http://localhost:5000/api/user/:id')
-            .then(response => {
-                this.setState({
-                    user: response.data.user
-                });
-            })
-            .catch(err => console.log(err));
+
+    const [isOpen, setIsOpen] =React.useState(false);
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
     }
+
+
     const NavMenu = () =>{
+        
         if(state,loggedIN){
             return(
                 <>
                 <li>
-                 <Link to="/movie" style={{textDecoration: "none"}}>Movies</Link>
+                    <Link to="/movie" style={{ textDecoration: "none" }}>
+                    Movies
+                    </Link>
                 </li>
                 <li>
-                 <Link to="/tv" style={{textDecoration: "none"}}>TV Series</Link>
+                    <Link to="/tv" style={{ textDecoration: "none" }}>
+                    TV Series
+                    </Link>
                 </li>
-                <li>
-                <Link to="/logout">Logout</Link>
-                </li>
+                
+                <div className='navbar'>
+                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                 <DropdownToggle caret>
+                          Services
+                            </DropdownToggle>
+                            <DropdownMenu>
+                            <DropdownItem >
+                            <Link to="/manage-account">Account</Link>
+                            </DropdownItem>
+                            <DropdownItem >
+                            <Link to="/logout">Logout</Link>
+                            </DropdownItem>
+                            <DropdownItem >
+                            <Link to="/settings">Cancel</Link>
+                            </DropdownItem>
+                            </DropdownMenu>
+                             </Dropdown>
+                 </div>
                 </>
             )
         }else{

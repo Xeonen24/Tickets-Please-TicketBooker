@@ -1,6 +1,6 @@
 @use "../../scss/" as *;
 
-a:hover{
+a:hover {
     color: rgb(153, 226, 42);
 }
 .logo {
@@ -42,10 +42,15 @@ a:hover{
             justify-content: center;
         }
     }
-    
 
     &__nav {
         @include flex(center, unset);
+
+        .navbar {
+                padding-top: 10%;
+             position: relative;
+
+        }
 
         & > * ~ * {
             margin-left: 2rem;
