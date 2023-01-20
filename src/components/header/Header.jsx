@@ -31,7 +31,7 @@ const Header = () => {
                  <Link to="/tv" style={{textDecoration: "none"}}>TV Series</Link>
                 </li>
                 <li>
-                <Link to="/logout"></Link>
+                <Link to="/logout">Logout</Link>
                 </li>
                 </>
             )
