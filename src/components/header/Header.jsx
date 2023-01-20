@@ -1,4 +1,4 @@
-import React, { useRef, useEffect,useContext } from 'react';
+import React, { useRef, useEffect,useContext,useState } from 'react';
 import { Link } from 'react-router-dom';
 import './header.scss';
 import logo from '../../assets/tmovie.png';
@@ -9,13 +9,12 @@ import {loggedIN} from '../../App'
 const Header = () => {
     const {state,dispatch} = useContext(UserContext)
     const headerRef = useRef(null);
-
     const [isOpen, setIsOpen] =React.useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
-
+    const [navbarOnClick, setnavbarOnClick] = useState(false);
 
     const NavMenu = () =>{
         if(state,loggedIN){
@@ -33,17 +32,21 @@ const Header = () => {
                 </li>
                 <div className='navbar'>
                     <li onClick={toggleMenu}>
-                        <Link to="#">Account</Link>
+                    <li onClick={()=>setnavbarOnClick(!navbarOnClick)}>
+                      <div className={`navbarOnClick ${navbarOnClick ? 'navbarOnClick-clicked' : ''}`} >
+                        <Link to="#" >%unameplaceholder%</Link>
+                      </div>
+                    </li>
                         {isOpen && (
                         <ul>
                             <li>
-                            <Link to="/logout">Manage Account</Link>
+                            <Link to="#">Account</Link>
                             </li>
                             <li>
                             <Link to="/logout">Logout</Link>
                             </li>
                             <li>
-                            <Link to="/settings">Cancel</Link>
+                            <Link to="#">Cancel</Link>
                             </li>
                         </ul>
                         )}
