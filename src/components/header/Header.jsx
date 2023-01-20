@@ -4,8 +4,6 @@ import './header.scss';
 import logo from '../../assets/tmovie.png';
 import { UserContext } from "../../App";
 import {loggedIN} from '../../App'
-import axios from 'axios';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 
 
@@ -14,10 +12,14 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 const Header = () => {
 
     const {state,dispatch} = useContext(UserContext)
-    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const toggle = () => setDropdownOpen(prevState => !prevState);
-  
+    const [navbarClass, setNavbarClass] = useState('');
+
+    const handleClick = () => {
+      setNavbarClass('onclick');
+    };
+
+
     const headerRef = useRef(null);
 
     const [isOpen, setIsOpen] =React.useState(false);
@@ -44,23 +46,23 @@ const Header = () => {
                 </li>
                 
                 <div className='navbar'>
-                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                 <DropdownToggle caret>
-                          Services
-                            </DropdownToggle>
-                            <DropdownMenu>
-                            <DropdownItem >
-                            <Link to="/manage-account">Account</Link>
-                            </DropdownItem>
-                            <DropdownItem >
+                  <li className={`navbar ${navbarClass}`} onClick={toggleMenu}>
+                        <Link to="#">Account</Link>
+                        {isOpen && (
+                        <ul>
+                            <li>
+                            <Link to="/logout">Manage Account</Link>
+                            </li>
+                            <li>
                             <Link to="/logout">Logout</Link>
-                            </DropdownItem>
-                            <DropdownItem >
+                            </li>
+                            <li>
                             <Link to="/settings">Cancel</Link>
-                            </DropdownItem>
-                            </DropdownMenu>
-                             </Dropdown>
-                 </div>
+                            </li>
+                        </ul>
+                        )}
+                    </li>
+                </div>
                 </>
             )
         }else{

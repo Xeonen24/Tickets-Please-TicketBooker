@@ -47,9 +47,12 @@ a:hover {
         @include flex(center, unset);
 
         .navbar {
-                padding-top: 10%;
-             position: relative;
-
+            position: relative;
+            &.onClick {
+                @extend .navbar;
+                color: aquamarine;
+            }
+            
         }
 
         & > * ~ * {
