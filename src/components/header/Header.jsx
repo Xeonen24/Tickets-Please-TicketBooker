@@ -5,10 +5,6 @@ import logo from '../../assets/tmovie.png';
 import { UserContext } from "../../App";
 import {loggedIN} from '../../App'
 
-
-
-
-
 const Header = () => {
 
     const {state,dispatch} = useContext(UserContext)
@@ -21,13 +17,12 @@ const Header = () => {
 
 
     const headerRef = useRef(null);
-
     const [isOpen, setIsOpen] =React.useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
-
+    const [navbarOnClick, setnavbarOnClick] = useState(false);
 
     const NavMenu = () =>{
         
@@ -50,6 +45,7 @@ const Header = () => {
                         <Link to="#">Account</Link>
                         {isOpen && (
                         <ul>
+                            <div className='curveNav'>
                             <li>
                             <Link to="#">Profile</Link>
                             </li>
@@ -59,6 +55,7 @@ const Header = () => {
                             <li>
                             <Link to="#">Cancel</Link>
                             </li>
+                            </div>
                         </ul>
                         )}
                     </li>
