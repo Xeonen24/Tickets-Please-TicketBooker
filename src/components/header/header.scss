@@ -1,6 +1,6 @@
 @use "../../scss/" as *;
 
-a:hover {
+a:hover{
     color: rgb(153, 226, 42);
 }
 .logo {
@@ -43,17 +43,20 @@ a:hover {
         }
     }
 
+    .navbar {
+        position: relative; 
+        width: 100px; 
+        
+        .navbar ul 
+        {
+            margin-top: 55px;
+        }
+        
+    }
+     
+
     &__nav {
         @include flex(center, unset);
-
-        .navbar {
-            position: relative;
-            &.onClick {
-                @extend .navbar;
-                color: aquamarine;
-            }
-            
-        }
 
         & > * ~ * {
             margin-left: 2rem;

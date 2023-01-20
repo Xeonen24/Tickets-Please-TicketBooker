@@ -51,13 +51,13 @@ const Header = () => {
                         {isOpen && (
                         <ul>
                             <li>
-                            <Link to="/logout">Manage Account</Link>
+                            <Link to="#">Profile</Link>
                             </li>
                             <li>
                             <Link to="/logout">Logout</Link>
                             </li>
                             <li>
-                            <Link to="/settings">Cancel</Link>
+                            <Link to="#">Cancel</Link>
                             </li>
                         </ul>
                         )}
