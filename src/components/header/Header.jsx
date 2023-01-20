@@ -39,7 +39,9 @@ const Header = () => {
                     TV Series
                     </Link>
                 </li>
-                
+                <li>
+                <Link to="#" style={{textDecoration: "none"}}>Book Now</Link>  
+                </li>
                 <div className='navbar'>
                   <li className={`navbar ${navbarClass}`} onClick={toggleMenu}>
                         <Link to="#">Account</Link>
