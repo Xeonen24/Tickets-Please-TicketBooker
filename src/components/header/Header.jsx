@@ -5,9 +5,13 @@ import logo from '../../assets/tmovie.png';
 import { UserContext } from "../../App";
 import {loggedIN} from '../../App'
 
-
 const Header = () => {
+
     const {state,dispatch} = useContext(UserContext)
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+  
     const headerRef = useRef(null);
     const [isOpen, setIsOpen] =React.useState(false);
 
@@ -17,6 +21,7 @@ const Header = () => {
     const [navbarOnClick, setnavbarOnClick] = useState(false);
 
     const NavMenu = () =>{
+        
         if(state,loggedIN){
             return(
                 <>
@@ -30,6 +35,7 @@ const Header = () => {
                     TV Series
                     </Link>
                 </li>
+                
                 <div className='navbar'>
                     <li onClick={toggleMenu}>
                     <li onClick={()=>setnavbarOnClick(!navbarOnClick)}>

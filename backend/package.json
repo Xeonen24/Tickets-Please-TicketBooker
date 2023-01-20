@@ -19,7 +19,11 @@
     "joi": "^17.5.0",
     "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
+<<<<<<< HEAD
+    "mongoose": "^6.8.4",
+=======
     "mongoose": "^6.1.2",
+>>>>>>> 7b1b46d736ff1cf40ea282215993b5996772f571
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
