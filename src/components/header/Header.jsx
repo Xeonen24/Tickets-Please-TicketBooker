@@ -8,10 +8,14 @@ import {loggedIN} from '../../App'
 const Header = () => {
 
     const {state,dispatch} = useContext(UserContext)
-    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const toggle = () => setDropdownOpen(prevState => !prevState);
-  
+    const [navbarClass, setNavbarClass] = useState('');
+
+    const handleClick = () => {
+      setNavbarClass('onclick');
+    };
+
+
     const headerRef = useRef(null);
     const [isOpen, setIsOpen] =React.useState(false);
 
@@ -37,16 +41,13 @@ const Header = () => {
                 </li>
                 
                 <div className='navbar'>
-                    <li onClick={toggleMenu}>
-                    <li onClick={()=>setnavbarOnClick(!navbarOnClick)}>
-                      <div className={`navbarOnClick ${navbarOnClick ? 'navbarOnClick-clicked' : ''}`} >
-                        <Link to="#" >%unameplaceholder%</Link>
-                      </div>
-                    </li>
+                  <li className={`navbar ${navbarClass}`} onClick={toggleMenu}>
+                        <Link to="#">Account</Link>
                         {isOpen && (
                         <ul>
+                            <div className='curveNav'>
                             <li>
-                            <Link to="#">Account</Link>
+                            <Link to="#">Profile</Link>
                             </li>
                             <li>
                             <Link to="/logout">Logout</Link>
@@ -54,6 +55,7 @@ const Header = () => {
                             <li>
                             <Link to="#">Cancel</Link>
                             </li>
+                            </div>
                         </ul>
                         )}
                     </li>
