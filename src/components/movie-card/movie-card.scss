@@ -34,7 +34,7 @@
     }
     .cardDesc{
         opacity: 0;
-        font-size: smaller;
+        font-size: medium;
         transition: all 0.3s ease;
         position: absolute;
         bottom: 5%;
@@ -42,9 +42,21 @@
         padding-right: 10%;
 
     }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: $black;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 10px;
+    }
     @media (hover: hover) and (pointer: fine) {
-        &:hover .btn {
-            transform: translate(-50%, -50%) scale(1);
+        &:hover::before {
+            opacity: 0.6;
         }
     }
 }
