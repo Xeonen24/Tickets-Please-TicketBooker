@@ -9,8 +9,8 @@ const Login = () => {
 	const {state, dispatch} = useContext(UserContext)
 	let history = useHistory()
     const [values, setValues] = useState({
-        username: 'xeeee',
-        password:'asdfgh123'
+        username: '',
+        password:''
     });
 
     const { username, password} = values;
