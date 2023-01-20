@@ -2,6 +2,8 @@
 
 a:hover{
     color: rgb(153, 226, 42);
+    transition: all 0.5s ease-out;
+    transform: scale(1.05);
 }
 .logo {
     font-size: 2.5rem;
@@ -10,6 +12,7 @@ a:hover{
     @include flex(center, unset);
 
     img {
+        padding-top: 0%;
         margin-right: 10px;
         width: 50px;
 
@@ -17,6 +20,9 @@ a:hover{
             width: 30px;
             margin-right: 0;
         }
+    }
+    .logologo{
+        padding-top: 22%;
     }
 }
 
@@ -46,14 +52,13 @@ a:hover{
     .navbar {
         position: relative; 
         width: 100px; 
-        text-align: center;
-
+        
         .navbar ul 
         {
             margin-top: 55px;
         }
         .curveNav{
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgb(0, 0, 0 , 0.5);
             border: 5px solid rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             width: 130px;
