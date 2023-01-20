@@ -98,8 +98,8 @@ const Header = () => {
                 <div className="logo">
                 <Link to="/">
                     <img className="logologo" src={logo} alt="" />
-                </Link>    
-                    <Link to="/">CinemaSeatsDirect</Link>
+
+                <span className='logo-text'>CinemaSeatsDirect</span></Link>
                 </div>
                 <ul className="header__nav">
                     <NavMenu />

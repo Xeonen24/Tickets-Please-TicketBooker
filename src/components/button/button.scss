@@ -14,9 +14,9 @@ button {
     font-size: 1.5rem;
     font-weight: 600;
     position: relative;
+    transition: all 0.5s ease;
     &:hover{
         scale: 108%;
-        transition: 0.3s ease;
     }
 }
 
@@ -26,7 +26,7 @@ button {
     background-color: transparent;
     color: $white;
     box-shadow: unset;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: all 0.3s ease, background-color 0.3s ease;
 }
 
 .btn-outline:hover {
