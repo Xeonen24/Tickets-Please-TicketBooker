@@ -2,11 +2,27 @@
 
 .footer {
     position: relative;
-    padding: 6rem 2rem;
+    padding: 3rem 0.1rem;   
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
-
+    .rightsReserved{
+        text-align: center;
+    }
+    .footerHr{
+        height: 1px;
+        border: none;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        background-image: linear-gradient(
+        to right,
+        rgb(204, 51, 163),
+        rgb(25, 235, 63),
+        rgb(248, 95, 95),
+        rgb(75, 12, 212),
+        
+      );
+    }
     &__content {
         max-width: 1000px;
 
@@ -36,5 +52,6 @@
                 margin-top: 1rem;
             }
         }
+        
     }
 }

@@ -8,6 +8,9 @@ import bg from '../../assets/footer-bg.jpg';
 import logo from '../../assets/tmovie.png';
 
 const Footer = () => {
+    const currentTimestamp = Date.now();
+    const currentDate = new Date(currentTimestamp);
+    const currentYear = currentDate.getFullYear();
     return (
         <div className="footer" style={{backgroundImage: `url(${bg})`}}>
             <div className="footer__content container">
@@ -25,6 +28,10 @@ const Footer = () => {
                         <Link to="/">About us</Link>
                     </div>
                 </div>
+            </div>
+            <hr className="footerHr"/>
+            <div className='rightsReserved'>
+            ©CSD {currentYear}-{currentYear+1}.All rights reserved.
             </div>
         </div>
     );

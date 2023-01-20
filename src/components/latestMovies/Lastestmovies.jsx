@@ -1,4 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { OutlineButton } from '../button/Button';
+import MovieList from '../movie-list/MovieList';
+import { category, movieType, tvType } from '../../api/tmdbApi';
 import axios from 'axios';
 const Latest=()=>{
     const axios = require('axios');
@@ -15,7 +19,17 @@ const Latest=()=>{
         console.log(error);
     });
     return(
-        <div></div>
+        <div className='container'>
+            <div className="section mb-3">
+                    <div className="section__header mb-2">
+                        <h2>Currently in cinemas</h2>
+                        <Link to="/movie">
+                            <OutlineButton className="small">View more</OutlineButton>
+                        </Link>
+                    </div>
+                    <MovieList category={category.movie} type={movieType.popular}/>
+                </div>
+        </div>
     );
 }
 export default Latest;
