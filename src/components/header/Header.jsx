@@ -5,23 +5,50 @@ import logo from '../../assets/tmovie.png';
 import { UserContext } from "../../App";
 import {loggedIN} from '../../App'
 
+
 const Header = () => {
     const {state,dispatch} = useContext(UserContext)
     const headerRef = useRef(null);
+
+    const [isOpen, setIsOpen] =React.useState(false);
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    }
+
 
     const NavMenu = () =>{
         if(state,loggedIN){
             return(
                 <>
                 <li>
-                 <Link to="/movie" style={{textDecoration: "none"}}>Movies</Link>
+                    <Link to="/movie" style={{ textDecoration: "none" }}>
+                    Movies
+                    </Link>
                 </li>
                 <li>
-                 <Link to="/tv" style={{textDecoration: "none"}}>TV Series</Link>
+                    <Link to="/tv" style={{ textDecoration: "none" }}>
+                    TV Series
+                    </Link>
                 </li>
-                <li>
-                <Link to="/logout">Logout</Link>
-                </li>
+                <div className='navbar'>
+                    <li onClick={toggleMenu}>
+                        <Link to="#">Account</Link>
+                        {isOpen && (
+                        <ul>
+                            <li>
+                            <Link to="/logout">Manage Account</Link>
+                            </li>
+                            <li>
+                            <Link to="/logout">Logout</Link>
+                            </li>
+                            <li>
+                            <Link to="/settings">Cancel</Link>
+                            </li>
+                        </ul>
+                        )}
+                    </li>
+                </div>
                 </>
             )
         }else{
