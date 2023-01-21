@@ -18,15 +18,27 @@ export const tvType = {
     on_the_air: 'on_the_air'
 }
 
+
+
 const tmdbApi = {
     getMoviesList: (type, params) => {
         const url = 'movie/' + movieType[type];
         return axiosClient.get(url, params);
     },
-    getLatestMovie: (type, params) => {
+    getLatestMovie: async (params) => {
+        const date = new Date();
+        date.setMonth(date.getMonth() - 1);
+        params = {
+        ...params,
+        'release_date.gte': date.toISOString().slice(0, 10),
+        }
         const url = 'movie/' + movieType.now_playing;
-        return axiosClient.get(url, params);
+        return axiosClient.get(url, {params});
     },
+         
+        
+    
+    
     getTvList: (type, params) => {
         const url = 'tv/' + tvType[type];
         return axiosClient.get(url, params);
