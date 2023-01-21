@@ -9,7 +9,7 @@ export const movieType = {
     upcoming: 'upcoming',
     popular: 'popular',
     top_rated: 'top_rated',
-    latest : 'latest'
+    now_playing : 'now_playing'
 }
 
 export const tvType = {
@@ -21,6 +21,10 @@ export const tvType = {
 const tmdbApi = {
     getMoviesList: (type, params) => {
         const url = 'movie/' + movieType[type];
+        return axiosClient.get(url, params);
+    },
+    getLatestMovie: (type, params) => {
+        const url = 'movie/' + movieType.now_playing;
         return axiosClient.get(url, params);
     },
     getTvList: (type, params) => {
