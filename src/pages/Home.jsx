@@ -4,14 +4,21 @@ import { OutlineButton } from '../components/button/Button';
 import HeroSlide from '../components/hero-slide/HeroSlide';
 import MovieList from '../components/movie-list/MovieList';
 import { category, movieType, tvType } from '../api/tmdbApi';
-import Latest from '../components/latestMovies/Lastestmovies'
 
 const Home = () => {
     return (
         <>
             <HeroSlide/>
             <div className="container">
-                <Latest/>
+            <div className="section mb-3">
+                    <div className="section__header mb-2">
+                        <h2>Currently in cinemas</h2>
+                        <Link to={"/movie?type=" + movieType.now_playing}>
+                        <OutlineButton className="small">View more</OutlineButton>
+                        </Link>
+                    </div>
+                    <MovieList category={category.movie} type={movieType.now_playing}/>
+                </div>
                 <div className="section mb-3">
                     <div className="section__header mb-2">
                         <h2>Trending Movies</h2>

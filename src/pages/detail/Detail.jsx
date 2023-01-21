@@ -12,13 +12,12 @@ import MovieList from '../../components/movie-list/MovieList';
 
 const Detail = () => {
 
-    const { category, id } = useParams();
-
+    const {category, id } = useParams();
     const [item, setItem] = useState(null);
 
     useEffect(() => {
         const getDetail = async () => {
-            const response = await tmdbApi.detail(category, id, {params:{}});
+            const response = await tmdbApi.detail(category, id ,{params:{}});
             setItem(response);
             window.scrollTo(0,0);
         }
@@ -46,6 +45,8 @@ const Detail = () => {
                                         ))
                                     }
                                 </div>
+                                <h3>Rating: {item ? item.vote_average: ""}</h3>
+                                <h4 className="movie__releaseDate">{item ? "Release date: " + item.release_date : ""}</h4>
                                 <p className="overview">{item.overview}</p>
                                 <div className="cast">
                                     <div className="section__header">
@@ -53,6 +54,20 @@ const Detail = () => {
                                     </div>
                                     <CastList id={item.id}/>
                                 </div>
+                                <div className="movie__production">
+                                <h3>Production Companies</h3>
+                {
+                    item && item.production_companies && item.production_companies.map(company => (
+                        <>
+                            {
+                                <span className="productionCompanyImage">
+                                    <img className="movie__productionComapany" src={"https://image.tmdb.org/t/p/original" + company.logo_path} />
+                                </span>
+                            }
+                        </>
+                    ))
+                }
+            </div>
                             </div>
                         </div>
                         <div className="container">
