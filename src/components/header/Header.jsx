@@ -44,7 +44,7 @@ const Header = () => {
                 </li>
                 <div className='navbar'>
                   <li className={`navbar ${navbarClass}`} onClick={toggleMenu}>
-                        <Link to="#">Account</Link>
+                        <Link to="#">{loggedIN}</Link>
                         {isOpen && (
                         <ul>
                             <div className='curveNav'>
