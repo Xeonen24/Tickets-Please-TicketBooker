@@ -1,37 +1,43 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { toast} from 'react-toastify';
 import "./signup.css";
 
 const Signup = () => {
-    const [values, setValues] = useState({
-        username: '',
-        email: '',
-        password:''
-    });
-    const {username, email, password} = values;
-    const handleChange = name => (e) =>{
-        setValues({...values, [name]: e.target.value});
-    }
-    const handleSubmit = async (e) =>{
-        e.preventDefault();
-        try{
-            const {data} = await axios.post('http://localhost:5000/api/signup', {
-                username,
-                email,
-                password
-            });
-            console.log(data);
-            if  (data.success === true){
-                setValues({username: '', email: '', password:''});
-                toast.success("Sign up successfully, please Login!");
-            }
-        } catch(err){
-            console.log(err.response.data.error);
-            toast.error(err.response.data.error);
-        }
-    }
+	const [formData, setFormData] = useState({
+		username: '',
+		email: '',
+		password: '',
+		password2: ''
+	});
+	const { username, email, password, password2 } = formData;
+	const onChange = e =>
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	const onSubmit = async e => {
+		e.preventDefault();
+		if (password !== password2) {
+			console.log('Passwords do not match');
+		} else {
+			const newUser = {
+				username,
+				email,
+				password
+			};
+			try {
+				const config = {
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				};
+				const body = JSON.stringify(newUser);
+				const res = await axios.post('http://localhost:5000/api/register', body, config);
+				console.log(res.data);
+				window.location.href='/login'
+			} catch (err) {
+				console.error(err.response.data);
+			}
+		}
+	};
     return (
 		<div className="signup_container">
 			<div className="signup_form_container">
@@ -44,32 +50,41 @@ const Signup = () => {
 					</Link>
 				</div>
 				<div className="right">
-					<form className="form_container" onSubmit={handleSubmit}>
+					<form className="form_container" onSubmit={e => onSubmit(e)}>
 						<h1>Create Account</h1>
 						<input
-							type="text"
-							placeholder="Username"
-							name="username"
-							onChange={handleChange("username")}
+							type='text'
+							placeholder='Username'
+							name='username'
 							value={username}
+							onChange={e => onChange(e)}
 							required
 							className="input"
 						/>
 						<input
-							type="email"
-							placeholder="Email"
-							name="email"
-							onChange={handleChange("email")}
+							type='email'
+							placeholder='Email'
+							name='email'
 							value={email}
+							onChange={e => onChange(e)}
 							required
 							className="input"
 						/>
 						<input
-							type="password"
-							placeholder="Password"
-							name="password"
-							onChange={handleChange("password")}
+							type='password'
+							placeholder='Password'
+							name='password'
 							value={password}
+							onChange={e => onChange(e)}
+							required
+							className="input"
+						/>
+						<input
+							type='password'
+							placeholder='Re-Enter Password'
+							name='password2'
+							value={password2}
+							onChange={e => onChange(e)}
 							required
 							className="input"
 						/>

@@ -1,47 +1,38 @@
 import { useState,useContext } from "react";
 import axios from "axios";
-import { toast} from 'react-toastify';
-import { Link,useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./login.css";
 import { UserContext } from "../../App";
 const Login = () => {
 
 	const {state, dispatch} = useContext(UserContext)
-	let history = useHistory()
-    const [values, setValues] = useState({
-        username: '',
-        password:''
-    });
-
-    const { username, password} = values;
-    const handleChange = username => (e) =>{
-        setValues({...values, [username]: e.target.value});
-    }
+	const [formData, setFormData] = useState({
+		username: '',
+		password: ''
+		});
+	const { username, password } = formData;
+	const onChange = e =>
+	setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try{
-            const {data} = await axios.post('http://localhost:5000/api/signin', {
-                username,
-                password
-            });
-			
-            console.log(data);
-            if  (data.success === true){
-                setValues({ username: '', password:''});
-                toast.success("Log In successfully");
-                localStorage.setItem("token", JSON.stringify(data))
-				localStorage.setItem("isLoggedIn", true);
-				dispatch({type:"USER",payload:true})
-				history.push('/')
-				window.location.reload();
-            }
-        } catch(err){
-            console.log(err.response.data.error);
-            toast.error(err.response.data.error);
-        }
-    }
-    
+			const config = {
+				headers: {
+					'Content-Type': 'application/json'
+			}
+			};
+			const body = JSON.stringify({ username, password });
+			const res = await axios.post('http://localhost:5000/api/login', body, config);
+      		localStorage.setItem('token', res.data.token);
+			localStorage.setItem("isLoggedIn", true);
+			dispatch({type:"USER",payload:true})
+			console.log(res);
+			window.location.href='/'
+			} catch (err) {
+				console.error(err.response.data);
+			}
+		};
     return (
 		<div className="login_container">
 			<div className="login_form_container">
@@ -52,7 +43,7 @@ const Login = () => {
 							type="text"
 							placeholder="Username"
 							name="username"
-							onChange={handleChange("username")}
+							onChange={e => onChange(e)}
 							value={username}
 							required
 							className="input"
@@ -61,13 +52,13 @@ const Login = () => {
 							type="password"
 							placeholder="Password"
 							name="password"
-							onChange={handleChange("password")}
+							onChange={e => onChange(e)}
 							value={password}
 							required
 							className="input"
 						/>
 						<button type="submit" className="green_btn">
-							Sing In
+							Sign in
 						</button>
 					</form>
 				</div>

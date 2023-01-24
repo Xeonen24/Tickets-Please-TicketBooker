@@ -7,8 +7,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
-
-const authRoutes = require('./routes/auth');
+const Routes = require('./routes/routes');
 
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -26,10 +25,13 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(cors());
 
-app.use("/api", authRoutes)
+app.use("/api", Routes)
+
 
 app.use(errorHandler);
+
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{
     console.log(`App is running on port ${port}`);
 })
+

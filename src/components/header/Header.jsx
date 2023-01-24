@@ -1,5 +1,6 @@
 import React, { useRef, useEffect,useContext,useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './header.scss';
 import logo from '../../assets/tmovie.png';
 import { UserContext } from "../../App";
@@ -8,22 +9,24 @@ import {loggedIN} from '../../App'
 const Header = () => {
 
     const {state,dispatch} = useContext(UserContext)
-
-    const [navbarClass, setNavbarClass] = useState('');
-
-    const handleClick = () => {
-      setNavbarClass('onclick');
-    };
-
-
     const headerRef = useRef(null);
     const [isOpen, setIsOpen] =React.useState(false);
+    const [username, setUsername] = useState('');
 
+    useEffect(() => {
+        const fetchUsername = async () => {
+            try {
+                const {data} = await axios.get('http://localhost:5000/api/username');
+                setUsername(data.username);
+            } catch (err) {
+                console.error('Failed to fetch username', err);
+            }
+        }
+        fetchUsername();
+    }, []);
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
-    const [navbarOnClick, setnavbarOnClick] = useState(false);
-
     const NavMenu = () =>{
         
         if(state,loggedIN){
@@ -43,8 +46,8 @@ const Header = () => {
                 <Link to="#" style={{textDecoration: "none"}}>Book Now</Link>  
                 </li>
                 <div className='navbar'>
-                  <li className={`navbar ${navbarClass}`} onClick={toggleMenu}>
-                        <Link to="#">{loggedIN}</Link>
+                  <li className={`navbar`} onClick={toggleMenu}>
+                        <Link to="#">ss{username}</Link>
                         {isOpen && (
                         <ul>
                             <div className='curveNav'>

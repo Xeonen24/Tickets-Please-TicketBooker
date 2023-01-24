@@ -1,33 +1,26 @@
 import React, {useContext } from 'react';
 import axios from "axios";
-import {useHistory } from 'react-router-dom';
 import { toast} from 'react-toastify';
 import { UserContext } from "../../App";
 
-const Logout = () =>{
+const Logout = async() =>{
     const { state, dispatch } = useContext(UserContext);
-    let history = useHistory();
     try{
-        axios.get('http://localhost:5000/api/logout')
-        .then(res =>{
+        const res = await axios.post('http://localhost:5000/api/logout');
             toast.success('Log out successfully');
             localStorage.removeItem('token');
             dispatch({type:"USER",payload:false})
             localStorage.removeItem("isLoggedIn");
-            history.push('/');
-            window.location.reload();
-        })
-        .catch(error =>{
-            console.log(error);
-        })
+            localStorage.removeItem("data")
+            window.location.href='/';
     }
     catch(error) {
         console.log(error);
     }
     return(
-        <>
-            asd
-        </>
+        <div>
+            If you stay on this page that means logout function failed otherwise please wait a moment
+        </div>
     )
 }
 export default Logout
