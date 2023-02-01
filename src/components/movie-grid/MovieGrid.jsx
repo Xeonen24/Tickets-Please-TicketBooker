@@ -22,7 +22,7 @@ const MovieGrid = props => {
                 const params = {};
                 switch(props.category) {
                     case category.movie:
-                        response = await tmdbApi.getLatestMovie(movieType.now_playing, {params});
+                        response = await tmdbApi.getMoviesList(movieType.popular, {params});
                         break;
                     default:
                         response = await tmdbApi.getTvList(tvType.popular, {params});
@@ -48,7 +48,7 @@ const MovieGrid = props => {
             };
             switch(props.category) {
                 case category.movie:
-                    response =  await tmdbApi.getLatestMovie(params);
+                    response =  await tmdbApi.getMoviesList(movieType.popular, {params});
                     break;
                 default:
                     response = await tmdbApi.getTvList(tvType.popular, {params});
@@ -61,7 +61,6 @@ const MovieGrid = props => {
             response = await tmdbApi.search(props.category, {params});
         }
         setItems([...items, ...response.results]);
-        // increment the page by 1 for next time
         setPage(page => page + 1);
     }
     

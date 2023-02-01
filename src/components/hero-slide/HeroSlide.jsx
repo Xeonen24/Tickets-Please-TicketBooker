@@ -4,23 +4,20 @@ import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Button, { OutlineButton } from '../button/Button';
 import Modal, { ModalContent } from '../modal/Modal';
-import tmdbApi, { category, movieType } from '../../api/tmdbApi';
+import tmdbApi2, { categorys, movieType } from '../../api/tmdbApi2';
+import tmdbApi,{ category} from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
 import './hero-slide.scss';
 
 const HeroSlide = () => {
-    
     SwiperCore.use([Autoplay]);
-
     const [movieItems, setMovieItems] = useState([]);
-
     useEffect(() => {
         const getMovies = async () => {
             const params = {page: 1}
             try {
-                const response = await tmdbApi.getMoviesList(movieType.popular, {params});
+                const response = await tmdbApi2.getMoviezList(movieType.now_playing, {params});
                 setMovieItems(response.results.slice(0, 20));
-                console.log(response);
             } catch {
                 console.log('error');
             }
@@ -72,7 +69,7 @@ const HeroSlideItem = props => {
             const videSrc = 'https://www.youtube.com/embed/' + videos.results[0].key;
             modal.querySelector('.modal__content > iframe').setAttribute('src', videSrc);
         } else {
-            modal.querySelector('.modal__content').innerHTML = 'No trailer';
+            modal.querySelector('.modal__content > iframe').innerHTML = 'No trailer';
         }
 
         modal.classList.toggle('active');
@@ -89,7 +86,7 @@ const HeroSlideItem = props => {
                     <div className="overview">{item.overview}</div>
                     <div className="btns">
                         <Button onClick={() => history.push('/movie/' + item.id)}>
-                            Watch now
+                            More info
                         </Button>
                         <OutlineButton onClick={setModalActive}>
                             Watch trailer

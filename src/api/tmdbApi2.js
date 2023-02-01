@@ -1,7 +1,7 @@
-import axiosClient from "./axiosClient";
+import axiosClient2 from "./axiosClient2";
 
-export const category = {
-    movie: 'movie',
+export const categorys = {
+    movies: 'movie',
 }
 
 export const movieType = {
@@ -9,31 +9,31 @@ export const movieType = {
 }
 
 
-const tmdbApi = {
-    getMoviesList: (type, params) => {
+const tmdbApi2 = {
+    getMoviezList: (type, params) => {
         const url = 'movie/' + movieType[type];
-        return axiosClient.get(url, params);
+        return axiosClient2.get(url, params);
     },
-    getVideos: (cate, id) => {
-        const url = category[cate] + '/' + id + '/videos';
-        return axiosClient.get(url, {params: {}});
+    getVideos: (cates, id) => {
+        const url = categorys[cates] + '/' + id + '/videos';
+        return axiosClient2.get(url, {params: {}});
     },
-    search: (cate, params) => {
-        const url = 'search/' + category[cate];
-        return axiosClient.get(url, params);
+    search: (cates, params) => {
+        const url = 'search/' + categorys[cates];
+        return axiosClient2.get(url, params);
     },
-    detail: (cate, id, params) => {
-        const url = category[cate] + '/' + id;
-        return axiosClient.get(url, params);
+    detail: (cates, id, params) => {
+        const url = categorys[cates] + '/' + id;
+        return axiosClient2.get(url, params);
     },
-    credits: (cate, id) => {
-        const url = category[cate] + '/' + id + '/credits';
-        return axiosClient.get(url, {params: {}});
+    credits: (cates, id) => {
+        const url = categorys[cates] + '/' + id + '/credits';
+        return axiosClient2.get(url, {params: {}});
     },
-    similar: (cate, id) => {
-        const url = category[cate] + '/' + id + '/similar';
-        return axiosClient.get(url, {params: {}});
+    similar: (cates, id) => {
+        const url = categorys[cates] + '/' + id + '/similar';
+        return axiosClient2.get(url, {params: {}});
     },
 }
 
-export default tmdbApi;
+export default tmdbApi2;

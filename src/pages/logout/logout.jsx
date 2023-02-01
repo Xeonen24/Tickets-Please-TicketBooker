@@ -12,6 +12,7 @@ const Logout = async() =>{
             dispatch({type:"USER",payload:false})
             localStorage.removeItem("isLoggedIn");
             localStorage.removeItem("data")
+            localStorage.removeItem('username')
             window.location.href='/';
     }
     catch(error) {

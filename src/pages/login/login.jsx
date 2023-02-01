@@ -28,6 +28,7 @@ const Login = () => {
 			localStorage.setItem("isLoggedIn", true);
 			dispatch({type:"USER",payload:true})
 			console.log(res);
+			localStorage.setItem("username", username);
 			window.location.href='/'
 			} catch (err) {
 				console.error(err.response.data);

@@ -11,18 +11,9 @@ const Header = () => {
     const {state,dispatch} = useContext(UserContext)
     const headerRef = useRef(null);
     const [isOpen, setIsOpen] =React.useState(false);
-    const [username, setUsername] = useState('');
 
     useEffect(() => {
-        const fetchUsername = async () => {
-            try {
-                const {data} = await axios.get('http://localhost:5000/api/username');
-                setUsername(data.username);
-            } catch (err) {
-                console.error('Failed to fetch username', err);
-            }
-        }
-        fetchUsername();
+
     }, []);
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -43,11 +34,11 @@ const Header = () => {
                     </Link>
                 </li>
                 <li>
-                <Link to="#" style={{textDecoration: "none"}}>Book Now</Link>  
+                <Link to="/book-movie" style={{textDecoration: "none"}}>Book Now</Link>  
                 </li>
                 <div className='navbar'>
                   <li className={`navbar`} onClick={toggleMenu}>
-                        <Link to="#">ss{username}</Link>
+                        <Link to="#">{localStorage.getItem('username')}</Link>
                         {isOpen && (
                         <ul>
                             <div className='curveNav'>

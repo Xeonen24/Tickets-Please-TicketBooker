@@ -1,0 +1,80 @@
+@use "../../scss/" as *;
+
+.movie-card {
+    position: relative;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 160%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease-out;
+    
+    &:hover{
+        transform: scale(1.03);
+        .itemOverview{
+            color:rgb(255, 255, 255);
+            .cardDesc{
+                opacity: 1.5;
+            }
+        }
+
+    }
+
+    .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        opacity: 0%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .viewMore{
+        font-size: 15px;
+    }
+    .cardDesc{
+        opacity: 0;
+        font-size: medium;
+        transition: all 0.3s ease;
+        position: absolute;
+        bottom: 5%;
+        padding-left: 10%;
+        padding-right: 10%;
+
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: $black;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 10px;
+    }
+    @media (hover: hover) and (pointer: fine) {
+        &:hover::before {
+            opacity: 0.6;
+        }
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: $black;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 10px;
+    }
+    @media (hover: hover) and (pointer: fine) {
+        &:hover::before {
+            opacity: 0.5;
+        }
+    }
+
+}

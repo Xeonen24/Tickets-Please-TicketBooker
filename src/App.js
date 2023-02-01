@@ -8,6 +8,7 @@ import Footer from './components/footer/Footer';
 import Login from './pages/login/login'
 import Signup from './pages/signup/signup';
 import Logout from './pages/logout/logout';
+import BookMovie from './pages/BookMovie/BookMovie';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import Detail from './pages/detail/Detail';
@@ -42,6 +43,7 @@ const App = () =>{
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={Signup} />
                     <Route path="/logout" component={Logout} />
+                    <Route path="/book-movie" component={BookMovie} />
                             <Route path='/:category/search/:keyword'component={Catalog}/>
                              <Route path='/:category/:id' component={Detail}/>
                             <Route path='/:category' component={Catalog}/>
