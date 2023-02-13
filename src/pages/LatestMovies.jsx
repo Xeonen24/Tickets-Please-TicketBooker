@@ -9,7 +9,7 @@ function LatestMovies() {
       <div className="section mb-3">
           <div className="section__header mb-2">
               <h2>Currently in cinemas</h2>
-              <Link to={`/now_playing`}>
+              <Link to={`/book-movie`}>
                   <OutlineButton className="small">View more</OutlineButton>
               </Link>
           </div>
