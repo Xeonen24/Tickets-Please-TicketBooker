@@ -2,14 +2,16 @@ import React from 'react';
 import './movie-card.scss';
 import { Link } from 'react-router-dom';
 import apiConfig from '../../api/apiConfig';
-const MovieCard = props => {
 
-    const item  = props.item;
-    const link = '/' + 'movie' + '/' + item.id;
+const MovieCard2 = props => {
+
+    const item  = props.item; //eslint-disable-next-line
+    const link = '/' + 'movies' + '/' + item.id; 
 
     const bg = apiConfig.w500Image(item.poster_path || item.backdrop_path);
 
     return (
+        <>
         <Link to={link}>
             <div className="movie-card" style={{backgroundImage: `url(${bg})`}}>
             <div className="itemOverview">
@@ -17,7 +19,8 @@ const MovieCard = props => {
                 </div>
             </div>
         </Link>
+        </>
     );
 }
 
-export default MovieCard;
+export default MovieCard2;

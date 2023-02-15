@@ -1,57 +1,77 @@
 @use "../../scss/" as *;
 
 .footer {
-    position: relative;
-    padding: 3rem 0.1rem;   
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-    .rightsReserved{
-        text-align: center;
+  position: relative;
+  padding: 3rem 0.1rem;
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  .rightsReserved {
+    text-align: center;
+  }
+  .footerHr {
+    margin-bottom:1.5rem;
+    margin-top:1.5rem;
+    border: none;
+    height: 3px;
+    animation-name: color-change;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes color-change {
+    0% {
+      background-color: red;
     }
-    .footerHr{
-        height: 1px;
-        border: none;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        background-image: linear-gradient(
-        to right,
-        rgb(204, 51, 163),
-        rgb(25, 235, 63),
-        rgb(248, 95, 95),
-        rgb(75, 12, 212),
-        
-      );
+    14%{
+        background-color: orange;
     }
-    &__content {
-        max-width: 1000px;
-
-        &__logo {
-            @include flex(center, center);
-            margin-bottom: 3rem;
-        }
-
-        &__menus {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-
-            @include mobile {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        &__menu {
-            @include flex(flex-start, flex-start);
-            flex-direction: column;
-            margin-top: 1rem;
-
-            font-size: 1.5rem;
-            font-weight: 600;
-
-            & > * ~ * {
-                margin-top: 1rem;
-            }
-        }
-        
+    42% {
+      background-color: yellow;
     }
+    56%{
+        background-color: green;
+    }
+    70%{
+        background-color: blue;
+    }
+    84%{
+        background-color: indigo;
+    }
+    98% {
+      background-color: violet;
+    }
+    100%{
+        background-color: red;
+    }
+  }
+  &__content {
+    max-width: 1000px;
+
+    &__logo {
+      @include flex(center, center);
+      margin-bottom: 3rem;
+    }
+
+    &__menus {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      @include mobile {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    &__menu {
+      @include flex(flex-start, flex-start);
+      flex-direction: column;
+      margin-top: 1rem;
+
+      font-size: 1.5rem;
+      font-weight: 600;
+
+      & > * ~ * {
+        margin-top: 1rem;
+      }
+    }
+  }
 }

@@ -4,10 +4,11 @@ import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Button, { OutlineButton } from '../button/Button';
 import Modal, { ModalContent } from '../modal/Modal';
-import tmdbApi2, { categorys, movieType } from '../../api/tmdbApi2';
+import tmdbApi2, { movieType } from '../../api/tmdbApi2';
 import tmdbApi,{ category} from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
 import './hero-slide.scss';
+import {loggedIN} from '../../App'
 
 const HeroSlide = () => {
     SwiperCore.use([Autoplay]);
@@ -16,8 +17,13 @@ const HeroSlide = () => {
         const getMovies = async () => {
             const params = {page: 1}
             try {
-                const response = await tmdbApi2.getMoviezList(movieType.now_playing, {params});
-                setMovieItems(response.results.slice(0, 20));
+                if(loggedIN){
+                    const response = await tmdbApi2.getMoviezList(movieType.now_playing, {params});
+                    setMovieItems(response.results.slice(0, 20));
+                }else{
+                    const response = await tmdbApi.getMoviesList(movieType.now_playing, {params});
+                    setMovieItems(response.results.slice(0, 20));
+                }
             } catch {
                 console.log('error');
             }
@@ -32,7 +38,6 @@ const HeroSlide = () => {
                 grabCursor={true}
                 spaceBetween={0}
                 slidesPerView={1}
-                autoplay={{delay: 4000}}
                 loop={true}
             >
                 {
@@ -58,7 +63,7 @@ const HeroSlideItem = props => {
 
     const item = props.item;
 
-    const background = apiConfig.originalImage(item.backdrop_path ? item.backdrop_path : item.poster_path);
+    const background = apiConfig.originalImage(item.poster_path);
 
     const setModalActive = async () => {
         const modal = document.querySelector(`#modal_${item.id}`);
@@ -82,14 +87,14 @@ const HeroSlideItem = props => {
         >
             <div className="hero-slide__item__content container">
                 <div className="hero-slide__item__content__info">
-                    <h2 className="title">{item.title}</h2>
+                    <h3 className="title">{item.title}</h3>
                     <div className="overview">{item.overview}</div>
                     <div className="btns">
                         <Button onClick={() => history.push('/movie/' + item.id)}>
                             More info
                         </Button>
                         <OutlineButton onClick={setModalActive}>
-                            Watch trailer
+                            See Trailer
                         </OutlineButton>
                     </div>
                 </div>
@@ -111,7 +116,7 @@ const TrailerModal = props => {
     return (
         <Modal active={false} id={`modal_${item.id}`}>
             <ModalContent onClose={onClose}>
-                <iframe ref={iframeRef} width="100%" height="500px" title="trailer"></iframe>
+                <iframe ref={iframeRef} width="100%" height="800px" title="trailer"></iframe>
             </ModalContent>
         </Modal>
     )

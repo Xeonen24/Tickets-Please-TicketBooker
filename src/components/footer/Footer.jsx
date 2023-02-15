@@ -18,7 +18,7 @@ const Footer = () => {
                     <div className="logo">
                     <Link to="/">
                         <img src={logo} alt="" />
-                        CinemaSeatsDirect</Link>
+                        TicketsPlease?</Link>
                     </div>
                 </div>
                 <div className="footer__content__menus">
@@ -30,9 +30,9 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <hr className="footerHr"/>
+            <hr class="footerHr"/>
             <div className='rightsReserved'>
-            ©CSD {currentYear}-{currentYear+1}.All rights reserved.
+            <a href='#'>©TicketsPlease?</a> {currentYear}-{currentYear+1}.All rights reserved.
             </div>
         </div>
     );

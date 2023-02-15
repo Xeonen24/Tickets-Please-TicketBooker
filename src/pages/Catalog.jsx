@@ -7,7 +7,6 @@ import PageHeader from '../components/page-header/PageHeader';
 import { category as cate } from '../api/tmdbApi';
 import { categorys as cates } from '../api/tmdbApi2';
 import MovieGrid from '../components/movie-grid/MovieGrid';
-import MovieGrid2 from '../components/movie-grid/MovieGrid2';
 
 const Catalog = () => {
 
@@ -27,7 +26,6 @@ return (
     <div className="container">
         <div className="section mb-3">
             {category === cate.movie ? <MovieGrid category={category} /> : null}
-            {categorys === cates.movies ? <MovieGrid2 categorys={categorys} /> : null}
             {category === cate.tv ? <MovieGrid category={category} /> : null}
         </div>
     </div>

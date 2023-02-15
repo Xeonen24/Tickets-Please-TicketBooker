@@ -65,10 +65,10 @@ const MovieCarde = (props) => {
   return (
     <>
     <PageHeader />
-    <h2>Currently in cinemas</h2>
+    <h1 className='grid-test'>Currently in cinemas</h1>
     <div className="movie-grid">
         {
-          items.map((item, i) => <ActualMovieCard category={props.categorys} movie={item} key={i} />)
+          items.map((item, i) => <ActualMovieCard movie={item} key={i} />)
         }
         </div>
        {

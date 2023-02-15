@@ -1,7 +1,7 @@
 import axiosClient2 from "./axiosClient2";
 
 export const categorys = {
-    movies: 'movie',
+    movies: 'movies',
 }
 
 export const movieType = {
@@ -11,7 +11,7 @@ export const movieType = {
 
 const tmdbApi2 = {
     getMoviezList: (type, params) => {
-        const url = 'movie/' + movieType[type];
+        const url = 'movies/' + movieType[type];
         return axiosClient2.get(url, params);
     },
     getVideos: (cates, id) => {

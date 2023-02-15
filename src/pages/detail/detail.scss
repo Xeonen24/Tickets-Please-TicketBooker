@@ -1,7 +1,7 @@
 @use "../../scss/" as *;
 
 .banner {
-    height: 50vh;
+    height: 95vh;
     position: relative;
     background-position: center;
     background-size: cover;
@@ -30,13 +30,16 @@
 
 .movie-content {
     @include flex(flex-start, flex-start);
-    max-width: 1260px;
+    max-width: 1800px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -200px;
+    margin-top: -730px;
     position: relative;
     padding: 0 2rem;
 
+    .buttons{
+        margin-bottom: 20px;
+    }
     &__poster {
         flex: 1;
 
@@ -46,10 +49,10 @@
 
         &__img {
             background-position: center;
-            background-size: cover;
+            background-size: contain;
             background-repeat: no-repeat;
-            border-radius: $border-radius;
-            padding-top: 165%;
+            border-radius: 5rem;
+            padding-top: 120%;
         }
     }
 
@@ -69,21 +72,31 @@
 
         .title {
             font-size: 4rem;
-            line-height: 1;
+            line-height: 0.75;
+            margin-bottom: 3rem;
+        }
+        .fadedHR{
+            width: 93.5%;
         }
 
         .genres {
             & > * ~ * {
                 margin-left: 0.5rem;
             }
-
             &__item {
                 padding: 0.5rem 1.5rem;
                 border: 2px solid $white;
                 border-radius: $border-radius;
-                font-size: 0.8rem;
+                font-size: 1.1rem;
                 font-weight: 600;
-                background-color: $body-bg;
+                background: rgba(0%, 0%, 0%, 0.2)
+            }
+            &__items {
+                padding: 0.5rem 1.5rem;
+                border-radius: px;
+                font-size: 1.3rem;
+                font-weight: 600;
+                background: rgba(0%, 0%, 0%, 0.5)
             }
         }
     }
