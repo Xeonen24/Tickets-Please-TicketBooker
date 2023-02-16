@@ -6,10 +6,13 @@ const CircularRate = ({ value }) => {
       position: "absolute",
       display: "inline-block",
       width: "max-content",
-      left:115,
-      bottom:496
     }}>
-      <CircularProgress variant="determinate" value={value * 10} color="success" size={50} />
+      <CircularProgress 
+        variant="determinate" 
+        value={value * 10} 
+        color="error" 
+        size={60} 
+        />
       <Box sx={{
         position: "absolute",
         top: 0,

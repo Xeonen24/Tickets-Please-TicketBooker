@@ -23,22 +23,30 @@ const Detail = () => {
         }
         getDetail();
     }, [category, id]);
-    const ShowBookButton = () =>{
-        if(loggedIN){
-            return(
-                <>
-              <Link to={`/booking-page`}>
-                <OutlineButton className="buttons">Book Now</OutlineButton>
-              </Link>
-                </>
-            )
-        }else{
-            return (
-                <>
-                </>
-            )
-        }
-    }
+    const ShowBookButton = () => {
+      const handleClick = () => {
+        localStorage.setItem("bookingItemTitle", JSON.stringify(item.title || item.name));
+        localStorage.setItem("bookingItemId", JSON.stringify(id));        
+      }
+  
+      if (loggedIN) {
+          return (
+              <>
+                  <Link to={`/booking-page`}>
+                      <OutlineButton className="buttons" onClick={handleClick}>
+                          Book Now
+                      </OutlineButton>
+                  </Link>
+              </>
+          )
+      } else {
+          return (
+              <>
+              </>
+          )
+      }
+  }
+  
 
     return (
       <>
@@ -65,7 +73,7 @@ const Detail = () => {
               </div>
               <div className="movie-content__info">
                 <h1 className="title">{item.title || item.name}</h1>
-                <hr className="fadedHR"/>
+                <hr className="fadedHR" />
                 <div className="genres">
                   <span className="genres__items">Genres:</span>
                   {item.genres &&
@@ -75,13 +83,15 @@ const Detail = () => {
                       </span>
                     ))}
                 </div>
-                <ShowBookButton/>
-                <h4 className="movie__releaseDate">
+                <ShowBookButton />
+                <h2 className="movie__releaseDate">
                   {item ? "Release date: " + item.release_date : ""}
-                </h4>
-                <h3>
-                 Rating :<CircularRate value={item.vote_average} />
-                </h3>
+                </h2>
+                <h2>
+                  Rating :&nbsp;&nbsp;&nbsp;
+                  <CircularRate value={item.vote_average} />
+                </h2>
+                &nbsp;
                 <p className="overview">{item.overview}</p>
                 <div className="cast">
                   <div className="section__header">
@@ -90,7 +100,7 @@ const Detail = () => {
                   <CastList id={item.id} />
                 </div>
                 <div className="movie__production">
-                  <h3>Production Companies</h3>
+                  <h2>Production Companies</h2>
                   {item &&
                     item.production_companies &&
                     item.production_companies.map((company) => (
@@ -104,6 +114,7 @@ const Detail = () => {
                                 company.logo_path
                               }
                             />
+                            <h3 className='companyText'>{company.name}</h3>
                           </span>
                         }
                       </>

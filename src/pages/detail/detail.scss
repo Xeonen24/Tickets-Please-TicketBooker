@@ -1,7 +1,7 @@
 @use "../../scss/" as *;
 
 .banner {
-    height: 95vh;
+    height: 98vh;
     position: relative;
     background-position: center;
     background-size: cover;
@@ -40,6 +40,10 @@
     .buttons{
         margin-bottom: 20px;
     }
+    .overview{
+        font-size: 20px;
+        font-weight: 400;
+    }
     &__poster {
         flex: 1;
 
@@ -76,7 +80,10 @@
             margin-bottom: 3rem;
         }
         .fadedHR{
-            width: 93.5%;
+            width: 100%;
+            background: linear-gradient(to right, transparent, white, transparent);
+            border: none;
+            height: 3px;
         }
 
         .genres {
@@ -93,15 +100,25 @@
             }
             &__items {
                 padding: 0.5rem 1.5rem;
-                border-radius: px;
+                border-radius: 10px;
                 font-size: 1.3rem;
                 font-weight: 600;
-                background: rgba(0%, 0%, 0%, 0.5)
+                background: rgba(0%, 0%, 0%, 0.3)
             }
         }
     }
     .movie__productionComapany{
-        width: 350px;
+        width: 200px;
+        max-height: 100%;
+    }
+    .productionCompanyImage {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+    }
+    .companyText{
+        margin-top: 1rem;
     }
 }
 

@@ -1,19 +1,29 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect,useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import './header.scss';
 import logo from '../../assets/tmovie.png';
-import { UserContext } from "../../App";
 import {loggedIN} from '../../App'
 
 const Header = () => {
 
     const headerRef = useRef(null);
+    const [showHr, setShowHr] = useState(false);
     const [isOpen, setIsOpen] =React.useState(false);
 
     useEffect(() => {
 
     }, []);
+    useEffect(() => {
+        function handleScroll() {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            setShowHr(true);
+          } else {
+            setShowHr(false);
+          }
+        }
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+      }, []);
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
@@ -90,6 +100,7 @@ const Header = () => {
                     <NavMenu />
                 </ul>
             </div>
+            {showHr && <hr className="footerHr" />}
         </div>
     );
 

@@ -30,7 +30,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <hr class="footerHr"/>
+            <hr className="footerHr"/>
             <div className='rightsReserved'>
             <a href='#'>©TicketsPlease?</a> {currentYear}-{currentYear+1}.All rights reserved.
             </div>

@@ -69,7 +69,7 @@ const LatestMovies=(props)=> {
         <h2>Currently in cinemas</h2>
       </div>
       <div className="movie-grid">
-        {items.slice(0, 7).map((item, i) => (
+        {items.slice(0, 12).map((item, i) => (
           <ActualMovieCard movie={item} key={i} />
         ))}
       </div>

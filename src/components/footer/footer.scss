@@ -10,40 +10,43 @@
     text-align: center;
   }
   .footerHr {
-    margin-bottom:1.5rem;
-    margin-top:1.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
     border: none;
-    height: 3px;
+    height: 4px;
     animation-name: color-change;
-    animation-duration: 5s;
+    animation-duration: 10s;
     animation-iteration-count: infinite;
+    animation-timing-function: linear;
   }
+  
   @keyframes color-change {
     0% {
       background-color: red;
     }
-    14%{
-        background-color: orange;
+    10% {
+      background-color: orange;
     }
-    42% {
+    25% {
       background-color: yellow;
     }
-    56%{
-        background-color: green;
+    40% {
+      background-color: green;
     }
-    70%{
-        background-color: blue;
+    55% {
+      background-color: blue;
     }
-    84%{
-        background-color: indigo;
+    70% {
+      background-color: indigo;
     }
-    98% {
+    85% {
       background-color: violet;
     }
-    100%{
-        background-color: red;
+    100% {
+      background-color: red;
     }
   }
+  
   &__content {
     max-width: 1000px;
 

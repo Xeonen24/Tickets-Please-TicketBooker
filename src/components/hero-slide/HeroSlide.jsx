@@ -63,7 +63,7 @@ const HeroSlideItem = props => {
 
     const item = props.item;
 
-    const background = apiConfig.originalImage(item.poster_path);
+    const background = apiConfig.originalImage(item.backdrop_path ? item.backdrop_path : item.poster_path);
 
     const setModalActive = async () => {
         const modal = document.querySelector(`#modal_${item.id}`);
