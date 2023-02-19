@@ -32,7 +32,7 @@ const Detail = () => {
       if (loggedIN) {
           return (
               <>
-                  <Link to={`/booking-page`}>
+                  <Link to={`/select-theatre`}>
                       <OutlineButton className="buttons" onClick={handleClick}>
                           Book Now
                       </OutlineButton>

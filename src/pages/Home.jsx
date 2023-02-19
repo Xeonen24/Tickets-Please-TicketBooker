@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{useEffect} from 'react';
+import { Link ,useHistory} from 'react-router-dom';
 import { OutlineButton } from '../components/button/Button';
 import HeroSlide from '../components/hero-slide/HeroSlide';
 import MovieList from '../components/movie-list/MovieList';
@@ -8,6 +8,19 @@ import LatestMovies from './LatestMovies';
 import {loggedIN} from '../App'
 
 const Home = () => {
+    const history = useHistory();
+    useEffect(() => {
+      const unlisten = history.listen(() => {
+          if (!history.location.pathname.startsWith("/booking-page")) {
+              localStorage.removeItem("bookingItemTitle");
+              localStorage.removeItem("bookingItemId");
+              localStorage.removeItem("selectedTheatre")
+          }
+      });
+      return () => {
+          unlisten();
+      };
+  }, [history]);
     const NotLoggedIn = () =>{
       if(loggedIN){
             return(

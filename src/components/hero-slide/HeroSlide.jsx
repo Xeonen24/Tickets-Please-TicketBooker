@@ -38,6 +38,7 @@ const HeroSlide = () => {
                 grabCursor={true}
                 spaceBetween={0}
                 slidesPerView={1}
+                autoplay={true}
                 loop={true}
             >
                 {

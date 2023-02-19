@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 const errorHandler = require('./middleware/error');
 const Routes = require('./routes/routes');
 
@@ -22,9 +23,18 @@ app.use(bodyParser.urlencoded({
     limit: '100mb',
     extended: true
     }));
-app.use(cookieParser());
-app.use(cors());
 
+app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin || origin === 'http://localhost:3000') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true
+  }));
+  
 app.use("/api", Routes)
 
 

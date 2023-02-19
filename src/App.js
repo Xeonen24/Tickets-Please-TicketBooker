@@ -15,6 +15,8 @@ import Detail from './pages/detail/Detail';
 import  ClipLoader from 'react-spinners/ClipLoader'
 import {initialState,reduce} from './reducer/UseReducer';
 import BookPage from './pages/detail/BookPage';
+import TheatreSelect from './pages/TheatreSelect/TheatreSelect';
+import Profile from './pages/profile/Profile';
 
 export const UserContext = createContext();
 export const loggedIN = localStorage.getItem("isLoggedIn")
@@ -44,8 +46,10 @@ const App = () =>{
                     <Route path="/login" component={Login} />
                     <Route path="/signup" component={Signup} />
                     <Route path="/logout" component={Logout} />
+                    <Route path="/profile" component={Profile} />
                     <Route path="/book-movie" component={BookMovie} />
                     <Route path="/booking-page" component={BookPage} />
+                    <Route path="/select-theatre" component={TheatreSelect} />
                             <Route path='/:category/search/:keyword'component={Catalog}/>
                             <Route path='/:category/:id' component={Detail}/>
                             <Route path='/:category' component={Catalog}/>

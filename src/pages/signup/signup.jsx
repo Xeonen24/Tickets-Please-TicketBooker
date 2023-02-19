@@ -21,7 +21,8 @@ const Signup = () => {
 			const newUser = {
 				username,
 				email,
-				password
+				password,
+				password2
 			};
 			try {
 				const config = {

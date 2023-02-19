@@ -8,12 +8,18 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/material": "^5.11.9",
+    "@react-google-maps/api": "^2.18.1",
+    "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.22.0",
+    "cors-anywhere": "^0.4.4",
+    "formik": "^2.2.9",
+    "google-map-react": "^2.2.0",
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
+    "leaflet": "^1.9.3",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.7.0",
@@ -29,7 +35,8 @@
     "reactstrap": "^9.1.5",
     "sass": "^1.42.1",
     "swiper": "^6.8.4",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "yup": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

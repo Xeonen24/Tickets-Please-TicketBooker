@@ -1,11 +1,12 @@
 import { useState,useContext } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import "./login.css";
 import { UserContext } from "../../App";
+import axios from "axios";
 const Login = () => {
 
 	const {state, dispatch} = useContext(UserContext)
+	const history = useHistory()
 	const [formData, setFormData] = useState({
 		username: '',
 		password: ''
@@ -14,31 +15,36 @@ const Login = () => {
 	const onChange = e =>
 	setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault();
-        try{
-			const config = {
-				headers: {
-					'Content-Type': 'application/json'
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+		  const response = await axios.post('http://localhost:5000/api/login', {
+			username,
+			password
+		  }, {
+			withCredentials: true,
+			headers: {
+			  'Content-Type': 'application/json'
 			}
-			};
-			const body = JSON.stringify({ username, password });
-			const res = await axios.post('http://localhost:5000/api/login', body, config);
-      		localStorage.setItem('token', res.data.token);
-			localStorage.setItem("isLoggedIn", true);
-			dispatch({type:"USER",payload:true})
-			console.log(res);
-			localStorage.setItem("username", username);
-			window.location.href='/'
-			} catch (err) {
-				console.error(err.response.data);
-			}
-		};
+		  });
+	  
+		  if (response.status === 400) {
+			window.alert('Invalid credentials');
+		  } else {
+			window.alert('Login successful');
+			localStorage.setItem('isLoggedIn', true);
+			localStorage.setItem('username', username);
+			window.location.href = '/';
+		  }
+		} catch (error) {
+		  console.error(error);
+		}
+	  };
     return (
 		<div className="login_container">
 			<div className="login_form_container">
 				<div className="left">
-					<form className="form_container" onSubmit={handleSubmit}>
+					<form method ="POST"className="form_container" onSubmit={handleSubmit}>
 						<h1>Login to Your Account</h1>
 						<input
 							type="text"
