@@ -64,9 +64,9 @@ router.post('/login', asyncHandler(async (req, res) => {
     }
 }));
 
-router.get('/username', asyncHandler(async (req, res) => {
+router.get('/username', authen, asyncHandler(async (req, res) => {
     try {
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.userID);
         res.json({ username: user.username });
     } catch (err) {
         res.status(500).json({ error: 'Failed to fetch username' });

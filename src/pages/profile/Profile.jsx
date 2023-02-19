@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const Profile=()=> {
     const [bookings, setBookings] = useState([]);
+    const [usernames, setUsernames] = useState([]);
 
     useEffect(() => {
       axios.get('http://localhost:5000/api/bookings', { withCredentials: true })
@@ -13,9 +14,19 @@ const Profile=()=> {
           console.error(error);
         });
     }, []);
-    const username = localStorage.getItem('username')
+    useEffect(() => {
+      const fetchUsernames = async () => {
+        try {
+          const response = await axios.get('http://localhost:5000/api/username', { withCredentials: true });
+          setUsernames(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchUsernames();
+    }, []);
   return (
-    <div>Hi {username}, this is your profile page.
+    <div>Hi {usernames.username}, this is your profile page.
     <div>
     {bookings.map(booking => (
         <div key={booking._id}>

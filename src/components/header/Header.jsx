@@ -3,16 +3,27 @@ import { Link } from 'react-router-dom';
 import './header.scss';
 import logo from '../../assets/tmovie.png';
 import {loggedIN} from '../../App'
+import axios from 'axios';
 
 const Header = () => {
 
+    const [usernames, setUsernames] = useState([]);
     const headerRef = useRef(null);
     const [showHr, setShowHr] = useState(false);
-    const [isOpen, setIsOpen] =React.useState(false);
-
+    const [isOpen, setIsOpen] = useState(false);
+    
     useEffect(() => {
-
+      const fetchUsernames = async () => {
+        try {
+          const response = await axios.get('http://localhost:5000/api/username', { withCredentials: true });
+          setUsernames(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchUsernames();
     }, []);
+    
     useEffect(() => {
         function handleScroll() {
           if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -37,7 +48,7 @@ const Header = () => {
                 </li>
                 <div className='navbar'>
                   <li className={`navbar`} onClick={toggleMenu}>
-                        <Link to="#">{localStorage.getItem('username')}</Link>
+                        <Link to="#">{usernames.username}</Link>
                         {isOpen && (
                         <ul>
                             <div className='curveNav'>
