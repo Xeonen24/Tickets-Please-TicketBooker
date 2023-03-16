@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './theatreselect.css';
+import HeroSlide from '../../components/hero-slide/HeroSlide';
 
 function TheatreSelect() {
   const [city, setCity] = useState('');
@@ -19,6 +20,70 @@ function TheatreSelect() {
       });
     }
   }  
+  useEffect(() => {
+    const handleSelectFocus = (event) => {
+      if (event.target.tagName === 'SELECT') {
+        const select = event.target;
+        select.size = 5; 
+        select.classList.add('fadeIn'); 
+        select.classList.remove('fadeOut');
+        select.style.backgroundColor = '#FFF';
+      }
+    };
+  
+    const handleSelectBlur = (event) => {
+      if (event.target.tagName === 'SELECT') {
+        const select = event.target;
+        select.size = 1; 
+        select.classList.add('fadeOut');
+        select.classList.remove('fadeIn');
+        select.style.backgroundColor = '#FFF';
+      }
+    };
+  
+    const handleSelectChange = (event) => {
+      if (event.target.tagName === 'SELECT') {
+        const select = event.target;
+        select.size = 1; 
+        select.blur();
+        select.style.backgroundColor = '#FFF';
+      }
+    };
+  
+    const handleSelectMouseOver = (event) => {
+      if (event.target.tagName === 'SELECT') {
+        const select = event.target;
+        if (select.size === 1) {
+          select.style.backgroundColor = 'white';
+        }
+      }
+    };
+  
+    const handleSelectMouseOut = (event) => {
+      if (event.target.tagName === 'SELECT') {
+        const select = event.target;
+        if (select.size === 1) {
+          select.style.backgroundColor = 'white';
+        }
+      }
+    };
+  
+    document.addEventListener('focus', handleSelectFocus, true);
+    document.addEventListener('blur', handleSelectBlur, true);
+    document.addEventListener('change', handleSelectChange, true);
+    document.addEventListener('mouseover', handleSelectMouseOver, true);
+    document.addEventListener('mouseout', handleSelectMouseOut, true);
+  
+    return () => {
+      document.removeEventListener('focus', handleSelectFocus, true);
+      document.removeEventListener('blur', handleSelectBlur, true);
+      document.removeEventListener('change', handleSelectChange, true);
+      document.removeEventListener('mouseover', handleSelectMouseOver, true);
+      document.removeEventListener('mouseout', handleSelectMouseOut, true);
+    };
+  }, []);
+  
+
   
   useEffect(() => {
     if (location) {
@@ -48,13 +113,14 @@ function TheatreSelect() {
     const showTime = event.target.value;
     setSelectedShowTime(showTime);
     localStorage.setItem('selectedShowTime', showTime);
-    alert(`Selected show time: ${localStorage.getItem('selectedShowTime')}`);
   }
   function handleConfirm(){
     window.location.href='/booking-page'
   }
   
+  
   return (
+    <>
     <div className='theatreselect'>
       <form onSubmit={handleSubmit}>
         <label htmlFor='city-input'>
@@ -80,7 +146,7 @@ function TheatreSelect() {
       {showTimes.length > 0 ? (
         <div className='show-times'>
           <h2 className='heading-titles'>Show Times</h2>
-          <select value={selectedShowTime} onChange={handleShowTimeSelection}>
+          <select size ="1" value={selectedShowTime} onChange={handleShowTimeSelection}>
           <option value="">Select a show time</option>
           {showTimes.map((showTime, index) => (
         <option key={index} value={showTime}>
@@ -98,6 +164,8 @@ function TheatreSelect() {
 </div>
 ) : null}
 </div>
+<HeroSlide/>
+</>
 );
 }
 

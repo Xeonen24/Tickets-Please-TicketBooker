@@ -52,7 +52,7 @@ router.post('/login', asyncHandler(async (req, res) => {
             const isMatch = await bcrypt.compare(password, userSignin.password);
             token = await userSignin.generateAuthToken();
             res.header( 'Access-Control-Allow-Credentials',true);
-            res.cookie('jwtoken',token, { maxAge: 900000, httpOnly: false,SameSite: 'Lax'});
+            res.cookie('jwtoken', token, { maxAge: 99999999999, httpOnly: false, SameSite: 'Lax' });
             res.send('Cookie set!');
             if(!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
             res.status(200).json({message:'User signed in'})
@@ -114,35 +114,3 @@ router.get('/bookings', authen, asyncHandler(async (req, res) => {
   
 
 module.exports = router;
-
-
-
-
-// let user = await User.findOne({ email });
-// if (user) return res.status(400).json({ msg: 'User already exists' });
-
-// user = new User({
-//     username,
-//     email,
-//     password
-// });
-// const salt = await bcrypt.genSalt(10);
-// user.password = await bcrypt.hash(password, salt);
-// await user.save();
-// const payload = { user: { id: user.id } };
-// jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" }, (err, token) => {
-//     if (err) throw err;
-//     res.json({ token });
-// });
-
-
-// 
-// let user = await User.findOne({ username });
-// if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
-// const isMatch = await bcrypt.compare(password, user.password);
-// if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
-// const payload = { user: { id: user.id } };
-// jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" }, (err, token) => {
-//     if (err) throw err;
-//     res.json({ token });
-// });

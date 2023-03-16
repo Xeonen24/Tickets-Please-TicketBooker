@@ -58,6 +58,10 @@
     align-items: center;
     transition: all 0.3s ease;
   }
+  .confirmation{
+    margin-top: 1rem;
+    font-size: 21px;
+  }
   .heading-title{
     margin-left: 11rem;
     margin-top: 2rem;
@@ -86,4 +90,86 @@
     transform: scale(1.03);
   }
 
+  select{
+    width: 600px;
+    max-width: 100%;
+    overflow-y: auto;
+    cursor: pointer;
+    padding: 15px 25px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    color: black;
+    font-size: 18px;
+    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.10);
+  }
+  select option{
+    padding: 10px 0px;
+    margin-bottom: 8px;
+    border-radius: 1200px;
+    background-color: rgb(133, 197, 37);
+    white-space: pre-wrap;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  select option:hover{
+    background-color: rgb(67, 156, 23)  ;
+    transform: scale(1.02);
+  }
+  select option:checked{
+    box-shadow: 0 0 10px 100px rgb(51, 120, 16) inset;
+  }
+  select::-webkit-scrollbar-track
+  {
+    background-color: rgb(112, 234, 51);
+    border-radius: 12px;
+  }
   
+  select::-webkit-scrollbar
+  {
+    width: 8px;
+    background-color: rgb(85, 255, 0);
+  }
+  
+  select::-webkit-scrollbar-thumb
+  {
+    background-color: rgb(80, 185, 28);
+    border-radius: 12px;
+    background-image: -webkit-linear-gradient(90deg,
+                                              rgba(160, 160, 160, 0.2) 25%,
+                          transparent 25%,
+                          transparent 50%,
+                          rgba(160, 160, 160, 0.2) 50%,
+                          rgba(160, 160, 160, 0.2) 75%,
+                          transparent 75%,
+                          transparent)
+  }
+  select.fadeIn {
+    animation: fadeInDown 0.2s;
+  }
+  select.fadeOut{
+    animation: fadeInUp 0.2s;
+  }
+  @media screen and (max-width: 768px) {
+    .theatreselect {
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      margin-left: 0;
+      max-width: 100%;
+    }
+  
+    .heading-title {
+      margin-left: 1rem;
+    }
+  
+    .heading-titles {
+      margin-left: 1rem;
+    }
+  
+    button {
+      margin-left: 1rem;
+    }
+  }
