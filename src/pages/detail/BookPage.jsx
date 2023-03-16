@@ -170,6 +170,7 @@ const BookPage = () => {
       bookingItemTitle: localStorage.getItem("bookingItemTitle"),
       bookingItemId: localStorage.getItem("bookingItemId"),
       selectedTheatre: localStorage.getItem("selectedTheatre"),
+      showTime: localStorage.getItem('selectedShowTime'),
     };
 
     const res = await axios.post(
@@ -197,6 +198,7 @@ const BookPage = () => {
         localStorage.removeItem("bookingItemTitle");
         localStorage.removeItem("bookingItemId");
         localStorage.removeItem("selectedTheatre");
+        localStorage.removeItem('selectedShowTime')
       }
     });
     return () => {
@@ -207,7 +209,7 @@ const BookPage = () => {
   return (
     <div className="booking">
       <h2>Movie : {localStorage.getItem("bookingItemTitle")}</h2>
-      <h5>Movie ID : {localStorage.getItem("bookingItemId")}</h5>
+      <h5>Show Time : {localStorage.getItem("selectedShowTime")}</h5>
       &nbsp;
       <h3>Theatre Name: {localStorage.getItem("selectedTheatre")}</h3>
       &nbsp;

@@ -1,0 +1,31 @@
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+thead {
+  background-color: gray;
+  font-weight: bold;
+}
+
+th, td {
+  text-align: left;
+  padding: 12px;
+  border: 1px solid white;
+}
+

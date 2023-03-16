@@ -22,6 +22,10 @@ const bookingSchema = new Schema({
     type: String,
     default: '',
   },
+  showTime: {
+    type: String,
+    default: '',
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

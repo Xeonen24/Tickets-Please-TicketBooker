@@ -89,6 +89,7 @@ router.post('/store-booking',authen, asyncHandler(async (req, res) => {
       bookingItemTitle: req.body.bookingItemTitle,
       bookingItemId: req.body.bookingItemId,
       selectedTheatre: req.body.selectedTheatre,
+      showTime:req.body.showTime,
       user: req.userID
     });
       await booking.save();

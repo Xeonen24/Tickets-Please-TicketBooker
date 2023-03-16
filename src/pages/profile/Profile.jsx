@@ -1,46 +1,77 @@
-import React,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './profile.css';
 
-const Profile=()=> {
-    const [bookings, setBookings] = useState([]);
-    const [usernames, setUsernames] = useState([]);
+const Profile = () => {
+  const [bookings, setBookings] = useState([]);
+  const [usernames, setUsernames] = useState('');
 
-    useEffect(() => {
-      axios.get('http://localhost:5000/api/bookings', { withCredentials: true })
-        .then(response => {
-          setBookings(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }, []);
-    useEffect(() => {
-      const fetchUsernames = async () => {
-        try {
-          const response = await axios.get('http://localhost:5000/api/username', { withCredentials: true });
-          setUsernames(response.data);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      fetchUsernames();
-    }, []);
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/bookings', { withCredentials: true })
+      .then(response => {
+        setBookings(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const fetchUsernames = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/username', { withCredentials: true });
+        setUsernames(response.data.username);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUsernames();
+  }, []);
+
+  const getSeatInfo = (seat) => {
+    const row = parseInt(seat.charAt(0));
+    const column = parseInt(seat.substring(1)) - 1;
+    const seatTier = seat.includes('gold') ? 'Gold' : 'Silver';
+    return `Row - ${row}, Column - ${column}, Seat Tier - ${seatTier}`;
+  };
+
   return (
-    <div>Hi {usernames.username}, this is your profile page.
-    <div>
-    {bookings.map(booking => (
-        <div key={booking._id}>
-          <p>{booking.selectedSeats}</p>
-          <p>{booking.totalPrice}</p>
-          <p>{booking.bookingItemTitle}</p>
-          <p>{booking.bookingItemId}</p>
-          <p>{booking.selectedTheatre}</p>
-          <p>{booking.userId}</p>
-        </div>
-      ))}
+    <div className="profile-container">
+      <h1>Hi {usernames}, this is your profile page.</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Selected Seats</th>
+            <th>Total Price</th>
+            <th>Movie Title</th>
+            <th>Movie ID</th>
+            <th>Theatre</th>
+            <th>Show Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {bookings.map((booking) => (
+            <tr key={booking._id}>
+              <td>
+                {typeof booking.selectedSeats === 'string' && booking.selectedSeats.includes('gold') ? (
+                  booking.selectedSeats.split('gold').map((seat, index) => (
+                    <div key={index}>{getSeatInfo(seat)}</div>
+                  ))
+                ) : (
+                  <div>{booking.selectedSeats}</div>
+                )}
+              </td>
+              <td>{booking.totalPrice}</td>
+              <td>{booking.bookingItemTitle}</td>
+              <td>{booking.bookingItemId}</td>
+              <td>{booking.selectedTheatre}</td>
+              <td>{booking.showTime}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
