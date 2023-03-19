@@ -1,0 +1,10 @@
+@use "../scss/" as *;
+.banners {
+    height: 500px;
+    width: 500px;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 25rem;
+    border-radius: 1rem;
+}

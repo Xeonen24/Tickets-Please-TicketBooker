@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './theatreselect.css';
-import HeroSlide from '../../components/hero-slide/HeroSlide';
 
 function TheatreSelect() {
   const [city, setCity] = useState('');
@@ -164,7 +163,6 @@ function TheatreSelect() {
 </div>
 ) : null}
 </div>
-<HeroSlide/>
 </>
 );
 }

@@ -1,6 +1,22 @@
 @use "../../scss/" as *;
 
-
+.yo {
+  max-width: 1969px;
+  height: 31.3rem;
+  border-radius: 1rem;
+  margin: auto;
+  margin-bottom: 5rem;
+  background-color: rgb(32, 32, 32);
+  transition: all 0.3s ease;
+}
+.yo:hover{
+  transform: scale(1.02);
+}
+.infomovie {
+  margin-left: 25rem;
+  margin-top: 9.5rem;
+  margin-right: 2rem;
+}
 .booking{
     margin-top: 10rem;
     margin-bottom: 10rem;
@@ -141,8 +157,8 @@ p {
 
   img {
     max-width: 85%;
-    max-width: 92%;
-  }
+    max-width: 100%;
+    }
 }
 
 .subtitle {
