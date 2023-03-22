@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './profile.css';
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./profile.css";
 const Profile = () => {
   const [bookings, setBookings] = useState([]);
-  const [usernames, setUsernames] = useState('');
+  const [usernames, setUsernames] = useState("");
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/bookings', { withCredentials: true })
-      .then(response => {
+    axios
+      .get("http://localhost:5000/api/bookings", { withCredentials: true })
+      .then((response) => {
         setBookings(response.data);
+        localStorage.setItem("selectedSeats2", JSON.stringify(response.data.map(booking => booking.selectedSeats)));
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, []);  
 
   useEffect(() => {
     const fetchUsernames = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/username', { withCredentials: true });
+        const response = await axios.get("http://localhost:5000/api/username", {
+          withCredentials: true,
+        });
         setUsernames(response.data.username);
       } catch (error) {
         console.error(error);
@@ -27,13 +30,6 @@ const Profile = () => {
     };
     fetchUsernames();
   }, []);
-
-  const getSeatInfo = (seat) => {
-    const row = parseInt(seat.charAt(0));
-    const column = parseInt(seat.substring(1)) - 1;
-    const seatTier = seat.includes('gold') ? 'Gold' : 'Silver';
-    return `Row - ${row}, Column - ${column}, Seat Tier - ${seatTier}`;
-  };
 
   return (
     <div className="profile-container">
@@ -53,13 +49,7 @@ const Profile = () => {
           {bookings.map((booking) => (
             <tr key={booking._id}>
               <td>
-                {typeof booking.selectedSeats === 'string' && booking.selectedSeats.includes('gold') ? (
-                  booking.selectedSeats.split('gold').map((seat, index) => (
-                    <div key={index}>{getSeatInfo(seat)}</div>
-                  ))
-                ) : (
-                  <div>{booking.selectedSeats}</div>
-                )}
+               <div>{booking.selectedSeats}</div>
               </td>
               <td>{booking.totalPrice}</td>
               <td>{booking.bookingItemTitle}</td>

@@ -40,7 +40,9 @@ const BookPage = () => {
     } else {
       return 0;
     }
-  };const renderSeats = () => {
+  };
+  
+  const renderSeats = () => {
     const seats = [];
   
     const columnCount = 10;
@@ -82,13 +84,13 @@ const BookPage = () => {
       );
     };
   
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i <= 1; i++) {
       renderRow(i, "bronze");
     }
-      for (let i = 3; i < 6; i++) {
+      for (let i = 2; i <= 4; i++) {
       renderRow(i, "silver");
     }
-      for (let i = 7; i < 9; i++) {
+      for (let i = 5; i <= 6; i++) {
       renderRow(i, "gold");
     }
   
@@ -124,7 +126,7 @@ const BookPage = () => {
     );
     if (res.status === 201) {
       alert(
-        `You have booked ${selectedSeats.length} seat(s) for a total price of ${totalPrice} USD`
+        `You have booked ${selectedSeats.length} seat(s) for a total price of ${totalPrice} INR`
       );
     } else {
       throw new Error("Error storing booking");

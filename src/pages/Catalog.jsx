@@ -5,14 +5,13 @@ import { useParams } from 'react-router';
 import PageHeader from '../components/page-header/PageHeader';
 
 import { category as cate } from '../api/tmdbApi';
-import { categorys as cates } from '../api/tmdbApi2';
 import MovieGrid from '../components/movie-grid/MovieGrid';
 
 const Catalog = () => {
 
     const { category,categorys } = useParams();
     let headerText = '';
-    if (categorys === cates.movies) {
+    if (categorys === cate.movies) {
         headerText = 'Latest Movies';
     }else if(category === cate.movie){
         headerText = 'Trending Movies';

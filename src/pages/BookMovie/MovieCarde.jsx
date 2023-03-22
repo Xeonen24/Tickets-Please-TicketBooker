@@ -40,28 +40,29 @@ const MovieCarde = (props) => {
   }, [props.categorys, keyword]);
 
   const loadMore = async () => {
-      let response = null;
-      let startingPage = 2;
-      if (keyword === undefined) {
-          const params = {
-              page: startingPage
-          };
-          switch(props.categorys) {
-              case categorys.movies:
-                  break;
-              default:
-                response =  await tmdbApi2.getMoviezList(movieType.popular, {params});
-          }
-      } else {
-          const params = {
-              page: startingPage,
-              query: keyword
-          }
-          response = await tmdbApi2.search(props.categorys, {params});
+    let response = null;
+    const nextPage = page + 1;
+    if (keyword === undefined) {
+      const params = {
+        page: nextPage
+      };
+      switch(props.categorys) {
+        case categorys.movies:
+          break;
+        default:
+          response = await tmdbApi2.getMoviezList(movieType.popular, {params});
       }
-      setItems([...items, ...response.results]);
-      setPage(page => page + 1);
+    } else {
+      const params = {
+        page: nextPage,
+        query: keyword
+      }
+      response = await tmdbApi2.search(props.categorys, {params});
+    }
+    setItems(prevItems => [...prevItems, ...response.results]);
+    setPage(nextPage);
   }
+  
   return (
     <>
     <PageHeader />

@@ -73,13 +73,6 @@ const LatestMovies=(props)=> {
           <ActualMovieCard movie={item} key={i} />
         ))}
       </div>
-      {page < totalPage ? (
-        <div className="movie-grid__loadmore">
-          <OutlineButton className="small" onClick={loadMore}>
-            Load more
-          </OutlineButton>
-        </div>
-      ) : null}
       <Link to={`/book-movie`}>
           <OutlineButton className="button">View more</OutlineButton>
         </Link>

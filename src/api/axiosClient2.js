@@ -7,7 +7,7 @@ const startDate = new Date(currentDate.setMonth(currentDate.getMonth()-1));
 const endDate = new Date().toISOString().slice(0, 10);
 
 const axiosClient2 = axios.create({
-    baseURL: `${baseUrl}?api_key=${apiKey}&language=en&region=IN&with_original_language=hi&primary_release_date.gte=${startDate.toISOString().slice(0, 10)}&primary_release_date.lte=${endDate}&sort_by=popular`,
+    baseURL: `${baseUrl}?api_key=${apiKey}&language=en&region=IN&with_original_language=hi|en&primary_release_date.gte=${startDate.toISOString().slice(0, 10)}&primary_release_date.lte=${endDate}&sort_by=popular`,
     headers: {
         'Content-Type': 'application/json'
     }

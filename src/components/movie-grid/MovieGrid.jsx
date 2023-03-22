@@ -41,10 +41,10 @@ const MovieGrid = props => {
 
     const loadMore = async () => {
         let response = null;
-        let startingPage = 2;
+        const nextPage = page + 1;
         if (keyword === undefined) {
             const params = {
-                page: startingPage
+                page: nextPage
             };
             switch(props.category) {
                 case category.movie:
@@ -55,14 +55,15 @@ const MovieGrid = props => {
             }
         } else {
             const params = {
-                page: startingPage,
+                page: nextPage,
                 query: keyword
             }
             response = await tmdbApi.search(props.category, {params});
         }
         setItems([...items, ...response.results]);
-        setPage(page => page + 1);
+        setPage(nextPage);
     }
+    
     
 
     
