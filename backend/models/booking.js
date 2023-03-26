@@ -5,31 +5,41 @@ const bookingSchema = new Schema({
   selectedSeats: {
     type: Array,
     default: [],
+    required: true,
   },
   totalPrice: {
     type: Number,
-    default: 0,
+    required: true,
   },
   bookingItemTitle: {
     type: String,
-    default: '',
+    required: true,
   },
   bookingItemId: {
     type: String,
-    default: '',
+    required: true,
   },
   selectedTheatre: {
     type: String,
-    default: '',
+    required: true,
   },
   showTime: {
     type: String,
-    default: '',
+    required: true,
+  },
+  paymentId:{
+    type: String,
+    required: true,
+  },
+  isPaid: {
+    type: Boolean,
+    default: false,
   },
   user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  }
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Booking', bookingSchema);

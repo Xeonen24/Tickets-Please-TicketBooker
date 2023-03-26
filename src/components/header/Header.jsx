@@ -1,8 +1,8 @@
-import React, { useRef, useEffect,useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './header.scss';
 import logo from '../../assets/tmovie.png';
-import {loggedIN} from '../../App'
+import { loggedIN } from '../../App'
 import axios from 'axios';
 
 const Header = () => {
@@ -10,76 +10,86 @@ const Header = () => {
     const [usernames, setUsernames] = useState([]);
     const headerRef = useRef(null);
     const [showHr, setShowHr] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    
-    useEffect(() => {
-      const fetchUsernames = async () => {
-        try {
-          const response = await axios.get('http://localhost:5000/api/username', { withCredentials: true });
-          setUsernames(response.data);
-        } catch (error) {
-          console.error(error);
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    const toggleDropdown = () => {
+        if (showDropdown) {
+          setTimeout(() => {
+            setShowDropdown(false);
+          }, 100);
+        } else {
+          setShowDropdown(true);
         }
       };
-      fetchUsernames();
+      
+    useEffect(() => {
+        const fetchUsernames = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/username', { withCredentials: true });
+                setUsernames(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchUsernames();
     }, []);
-    
+
     useEffect(() => {
         function handleScroll() {
-          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            setShowHr(true);
-          } else {
-            setShowHr(false);
-          }
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                setShowHr(true);
+            } else {
+                setShowHr(false);
+            }
         }
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-      }, []);
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    }
-    const NavMenu = () =>{
-        
-        if(loggedIN){
-            return(
-                <>
-                <li>
-                <Link to="/book-movie" style={{textDecoration: "none"}}>Book Now</Link>  
-                </li>
-                <div className='navbar'>
-                  <li className={`navbar`} onClick={toggleMenu}>
-                        <Link to="#">{usernames.username}</Link>
-                        {isOpen && (
-                        <ul>
-                            <div className='curveNav'>
-                            <li>
-                            <Link to="/profile">Profile</Link>
-                            </li>
-                            <li>
-                            <Link to="/logout">Logout</Link>
-                            </li>
-                            <li>
-                            <Link to="#">Cancel</Link>
-                            </li>
-                            </div>
-                        </ul>
-                        )}
-                    </li>
-                </div>
-                </>
-            )
-        }else{
+    }, []);
+
+    const NavMenu = () => {
+
+        if (loggedIN) {
             return (
                 <>
-                <li>
-                 <Link to="/movie" style={{textDecoration: "none"}}>Movies</Link>
-                </li>
-                <li>
-                 <Link to="/tv" style={{textDecoration: "none"}}>TV Series</Link>
-                </li>
-                <li>
-                 <Link to="/login">Sign in/up</Link>
-                </li>
+                  <li>
+                    <Link to="/book-movie" style={{ textDecoration: "none" }}>
+                      Book Now
+                    </Link>
+                  </li>
+                  <div className="navbar">
+                    <li className={`navbar ${showDropdown ? "active" : ""}`} onClick={toggleDropdown}>
+                      <Link to="#">{usernames.username}</Link>
+                      <ul className={showDropdown ? "dropdown-show" : "dropdown-hide"}>
+                        <div className="curveNav">
+                          <li>
+                            <Link to="/profile">Profile</Link>
+                          </li>
+                          <li>
+                            <Link to="/logout">Logout</Link>
+                          </li>
+                          <li>
+                            <Link to="#" onClick={toggleDropdown}>
+                              Cancel
+                            </Link>
+                          </li>
+                        </div>
+                      </ul>
+                    </li>
+                  </div>
+                </>
+              );
+          } else {
+            return (
+                <>
+                    <li>
+                        <Link to="/movie" style={{ textDecoration: "none" }}>Movies</Link>
+                    </li>
+                    <li>
+                        <Link to="/tv" style={{ textDecoration: "none" }}>TV Series</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Sign in/up</Link>
+                    </li>
                 </>
             )
         }
@@ -102,10 +112,10 @@ const Header = () => {
         <div ref={headerRef} className="header">
             <div className="header__wrap container">
                 <div className="logo">
-                <Link to="/">
-                    <img className="logologo" src={logo} alt="" />
+                    <Link to="/">
+                        <img className="logologo" src={logo} alt="" />
 
-                <span className='logo-text'>TicketsPlease?</span></Link>
+                        <span className='logo-text'>TicketsPlease?</span></Link>
                 </div>
                 <ul className="header__nav">
                     <NavMenu />

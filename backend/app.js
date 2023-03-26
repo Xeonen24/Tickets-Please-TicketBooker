@@ -9,6 +9,9 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const errorHandler = require('./middleware/error');
 const Routes = require('./routes/routes');
+const AdminBro = require('admin-bro');
+const AdminBroExpress = require('@admin-bro/express');
+const AdminBroMongoose = require('@admin-bro/mongoose');
 
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -16,6 +19,17 @@ mongoose.connect(process.env.DATABASE, {
 })
 .then(()=> console.log('DB connected'))
 .catch((err)=> console.log(err));
+
+AdminBro.registerAdapter(AdminBroMongoose);
+
+const adminBro = new AdminBro({
+  databases: [mongoose],
+  rootPath: '/admin',
+});
+
+const router = AdminBroExpress.buildRouter(adminBro);
+
+app.use(adminBro.options.rootPath, router);
 
 app.use(morgan('dev'));
 app.use(bodyParser.json({limit: '100mb'}));

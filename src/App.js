@@ -17,6 +17,8 @@ import {initialState,reduce} from './reducer/UseReducer';
 import BookPage from './pages/detail/BookPage';
 import TheatreSelect from './pages/TheatreSelect/TheatreSelect';
 import Profile from './pages/profile/Profile';
+import Payment from './pages/Payment/Payment';
+import AdminLogin from './pages/AdminLogin/AdminLogin';
 
 export const UserContext = createContext();
 export const loggedIN = localStorage.getItem("isLoggedIn")
@@ -44,9 +46,11 @@ const App = () =>{
                     <Header {...props}/>
                     <Switch>
                     <Route path="/login" component={Login} />
+                    <Route path="/payments" component={Payment} />
                     <Route path="/signup" component={Signup} />
                     <Route path="/logout" component={Logout} />
                     <Route path="/profile" component={Profile} />
+                    <Route path="/adminlogin" component={AdminLogin} />
                     <Route path="/book-movie" component={BookMovie} />
                     <Route path="/booking-page" component={BookPage} />
                     <Route path="/select-theatre" component={TheatreSelect} />

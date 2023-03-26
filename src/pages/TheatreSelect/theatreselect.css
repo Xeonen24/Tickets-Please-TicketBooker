@@ -1,4 +1,30 @@
-.theatreselect {
+@keyframes fade-in-up {
+  0% {
+  opacity: 0;
+  transform: translateY(20px);
+  }
+  100% {
+  opacity: 1;
+  transform: translateY(0);
+  }
+  }
+  
+  /* Animation for the theatre list */
+  .theatre-list {
+  animation: fade-in-up 0.5s ease-out forwards;
+  }
+  
+  /* Animation for the show times */
+  .show-times {
+  animation: fade-in-up 0.5s 0.1s ease-out forwards;
+  }
+  
+  /* Animation for the confirmation */
+  .confirmation {
+  animation: fade-in-up 0.5s 0.2s ease-out forwards;
+  }
+  
+  .theatreselect {
   margin-top: 15rem;
   margin-bottom: 10rem;
   margin-left: 40rem;
@@ -7,104 +33,108 @@
   background-color: gray;
   border-radius: 8px;
   position: relative;
-}
+  }
   
   label {
-    font-size: 18px;
-    margin-right: 10px;
+  font-size: 18px;
+  margin-right: 10px;
   }
   
   input {
-    font-size: 18px;
-    padding: 5px;
-    border-radius: 5px;
-    border: none;
-    margin-right: 10px;
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
   }
   
   button {
-    font-size: 20px;
-    padding: 7px 10px;
-    margin-left: 12.3rem;
-    margin-top: 2rem;
-    background-color: rgb(133, 197, 37);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s all ease;
+  font-size: 20px;
+  padding: 7px 10px;
+  margin-left: 12.3rem;
+  margin-top: 2rem;
+  background-color: rgb(133, 197, 37);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all ease;
   }
   
   button:hover {
-    background-color: rgb(67, 156, 23);
-    transform: scale(1.05);
+  background-color: rgb(67, 156, 23);
+  transform: scale(1.05);
   }
   
   h2 {
-    font-size: 24px;
-    margin-top: 20px;
+  font-size: 24px;
+  margin-top: 20px;
   }
   
   ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   }
   
   li {
-    font-size: 18px;
-    margin: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
+  font-size: 18px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
   }
-  .confirmation{
-    margin-top: 1rem;
-    font-size: 21px;
+  
+  .confirmation {
+  margin-top: 1rem;
+  font-size: 21px;
   }
-  .heading-title{
-    margin-left: 11rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  
+  .heading-title {
+  margin-left: 11rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   }
-  .heading-titles{
-    margin-left: 12.5rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  
+  .heading-titles {
+  margin-left: 12.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   }
+  
   li button {
-    font-size: 20px;
-    background-color: rgb(153, 226, 42);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin: 0;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  font-size: 20px;
+  background-color: rgb(153, 226, 42);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
   }
   
   li button:hover {
-    background-color: rgb(67, 156, 23);
-    transform: scale(1.03);
+  background-color: rgb(67, 156, 23);
+  transform: scale(1.03);
   }
-
-  select{
-    width: 600px;
-    max-width: 100%;
-    overflow-y: auto;
-    cursor: pointer;
-    padding: 15px 25px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border: none;
-    outline: none;
-    border-radius: 12px;
-    color: black;
-    font-size: 18px;
-    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.10);
+  
+  select {
+  width: 600px;
+  max-width: 100%;
+  overflow-y: auto;
+  cursor: pointer;
+  padding: 15px 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  color: black;
+  font-size: 18px;
+  box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.10);
   }
   select option{
     padding: 10px 0px;

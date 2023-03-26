@@ -39,34 +39,36 @@ const MovieCarde = (props) => {
       getList();
   }, [props.categorys, keyword]);
 
-  const loadMore = async () => {
-    let response = null;
-    const nextPage = page + 1;
-    if (keyword === undefined) {
-      const params = {
-        page: nextPage
-      };
-      switch(props.categorys) {
-        case categorys.movies:
-          break;
-        default:
-          response = await tmdbApi2.getMoviezList(movieType.popular, {params});
-      }
-    } else {
-      const params = {
-        page: nextPage,
-        query: keyword
-      }
-      response = await tmdbApi2.search(props.categorys, {params});
+   const loadMore = async () => {
+        let response = null;
+        const nextPage = page + 1;
+        if (keyword === undefined) {
+            const params = {
+                page: nextPage
+            };
+            switch(props.categorys) {
+                case categorys.movies:
+                    break;
+                default:
+                  response =  await tmdbApi2.getMoviezList(movieType.popular, {params});
+            }
+        } else {
+            const params = {
+                page: nextPage,
+                query: keyword
+            }
+            response = await tmdbApi2.search(props.categorys, {params});
+        }
+        setItems([...items, ...response.results]);
+        setPage(nextPage);
     }
-    setItems(prevItems => [...prevItems, ...response.results]);
-    setPage(nextPage);
-  }
+    
+    
   
   return (
     <>
     <PageHeader />
-    <h1 className='grid-test'>Currently in cinemas</h1>
+    <h1 className='grid-test'>Ongoing</h1>
     <div className="movie-grid">
         {
           items.map((item, i) => <ActualMovieCard movie={item} key={i} />)

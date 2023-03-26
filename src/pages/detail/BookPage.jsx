@@ -12,6 +12,9 @@ const BookPage = () => {
   const [movie, setMovie] = useState(null);
   const [overview, setOverview] = useState('');
 
+  const [amount, setAmount] = useState();
+  const [isPaid, setIsPaid] = useState(false);
+
   const selectSeat = (rowIndex, seatIndex, seatType) => {
     const selectedSeat = [rowIndex, seatIndex, seatType];
     const seatAlreadySelected = selectedSeats.some(
@@ -99,40 +102,72 @@ const BookPage = () => {
   
     return seats;
   };
-  
   const handleConfirm = async () => {
     if (selectedSeats.length === 0) {
       alert("Please select at least one seat!");
       return;
     }
-    const bookingData = {
-      selectedSeats,
-      totalPrice,
-      bookingItemTitle: localStorage.getItem("bookingItemTitle"),
-      bookingItemId: localStorage.getItem("bookingItemId"),
-      selectedTheatre: localStorage.getItem("selectedTheatre"),
-      showTime: localStorage.getItem("selectedShowTime"),
-    };
-
-    const res = await axios.post(
-      "http://localhost:5000/api/store-booking",
-      bookingData,
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (res.status === 201) {
-      alert(
-        `You have booked ${selectedSeats.length} seat(s) for a total price of ${totalPrice} INR`
-      );
+  
+    const amount = totalPrice;
+  
+    if (amount === '') {
+      alert('Please enter an amount');
     } else {
-      throw new Error("Error storing booking");
+      const options = {
+        key: 'rzp_test_ZaBqur5zk4j0JC',
+        key_secret: 'T1VutDUqjsce2ZKfv04chR8O',
+        amount: amount * 100,
+        currency: 'INR',
+        name: 'TicketsPlease Merchant',
+        handler: function (response) {
+          const bookingData = {
+            selectedSeats,
+            totalPrice,
+            paymentId : response.razorpay_payment_id,
+            bookingItemTitle: localStorage.getItem("bookingItemTitle"),
+            bookingItemId: localStorage.getItem("bookingItemId"),
+            selectedTheatre: localStorage.getItem("selectedTheatre"),
+            showTime: localStorage.getItem("selectedShowTime"),
+            isPaid: true,
+          };
+  
+          axios.post(
+            "http://localhost:5000/api/store-booking",
+            bookingData,
+            {
+              withCredentials: true,
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          ).then((res) => {
+            if(res.status === 201){
+              alert(
+                `You have booked ${selectedSeats.length} seat(s) for a total price of ${totalPrice} INR`
+              );
+            }else {
+              throw new Error("Error processing payment");
+            }
+          });
+          alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+        },
+        notify: {
+          sms: true,
+          email: true
+        },
+        notes: {
+          address: 'Alibag, 402201'
+        },
+        theme: {
+          color: 'black'
+        },
+      };
+      const pay = new window.Razorpay(options);
+      pay.open();
     }
-  };
-
+  }
+  
+  
   useEffect(() => {
     const unlisten = history.listen(() => {
       if (!history.location.pathname.startsWith("/booking-page")) {
@@ -140,6 +175,7 @@ const BookPage = () => {
         localStorage.removeItem("bookingItemId");
         localStorage.removeItem("selectedTheatre");
         localStorage.removeItem("selectedShowTime");
+        localStorage.removeItem("totalPrice");
       }
     });
     return () => {
@@ -191,7 +227,7 @@ const BookPage = () => {
           &nbsp;
           <h4>{overview}</h4>
           &nbsp;
-          <h5>Show Time : {localStorage.getItem("selectedShowTime")}</h5>
+          <h4>Show Time : {localStorage.getItem("selectedShowTime")}</h4>
           &nbsp;
           <h3>Theatre Name: {localStorage.getItem("selectedTheatre")}</h3>
           &nbsp;
