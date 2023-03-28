@@ -18,12 +18,5 @@ const authen = async (req,res,next) =>{
     console.log(err)
   }
 }
-const requireAuth = async(req, res, next)=> {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/admin-login');
-}
 
-
-module.exports = authen
+module.exports = authen;

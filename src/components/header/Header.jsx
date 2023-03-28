@@ -111,12 +111,13 @@ const Header = () => {
     return (
         <div ref={headerRef} className="header">
             <div className="header__wrap container">
+            <Link to="/">
                 <div className="logo">
-                    <Link to="/">
-                        <img className="logologo" src={logo} alt="" />
+                <img className="logologo" src={logo} alt="" />
 
-                        <span className='logo-text'>TicketsPlease?</span></Link>
+                        <span className='logo-text'>TicketsPlease?</span>
                 </div>
+              </Link>
                 <ul className="header__nav">
                     <NavMenu />
                 </ul>

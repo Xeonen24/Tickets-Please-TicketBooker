@@ -21,7 +21,7 @@ import Payment from './pages/Payment/Payment';
 import AdminLogin from './pages/AdminLogin/AdminLogin';
 
 export const UserContext = createContext();
-export const loggedIN = localStorage.getItem("isLoggedIn")
+export const loggedIN = document.cookie.includes("jwtoken");
 
 
 const App = () =>{

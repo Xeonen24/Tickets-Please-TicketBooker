@@ -10,7 +10,6 @@ a:hover{
     font-size: 2.5rem;
     font-weight: 600;
     @include flex(center, unset);
-
     img {
         margin-right: 10px;
         width: 50px;
@@ -19,11 +18,7 @@ a:hover{
             margin-right: 0;
         }
     }
-    .logologo{
-        padding-top: 0%;
-    }
 }
-
 .header {
     height: $header-height;
     background-color: rgb(0, 0, 0 , 0.1);

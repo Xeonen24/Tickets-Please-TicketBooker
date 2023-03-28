@@ -21,24 +21,19 @@ const Wrapper = styled.section`
   background: white;
 `;
 
-const imgStyle = {
-  width: "100%",
-  height: "30%",
-};
+const leadstyle= {
+  marginTop : "2rem"
+}
 
 const Dashboard = () => {
   return (
     <div>
-      <img
-        style={imgStyle}
-        src="images/banner-admin-page.jpg"
-        alt="dashboard-head"
-      />
       <Wrapper>
         <Title>Welcome to the Admin Panel</Title>
         <Lead>
-          Here you can manage your products and categories as well as view users
-          and their orders.
+          <div style={leadstyle}>
+          Checkout the sidebar to manage users and their bookings.
+          </div>
         </Lead>
       </Wrapper>
     </div>

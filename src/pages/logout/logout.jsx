@@ -13,6 +13,7 @@ const Logout = async() =>{
             localStorage.removeItem("isLoggedIn");
             localStorage.removeItem("data")
             localStorage.removeItem('username')
+            document.cookie = "jwtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             window.location.href='/';
     }
     catch(error) {
@@ -24,4 +25,5 @@ const Logout = async() =>{
         </div>
     )
 }
+
 export default Logout

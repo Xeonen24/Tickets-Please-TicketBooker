@@ -19,13 +19,13 @@ const userSchema = new mongoose.Schema({
        type: String,
        trim: true,
        required : [true, 'Please add a Password'],
-       minlength: [6, 'password must have at least six(6) characters'],
+       minlength: [6, 'password must have at least four(4) characters'],
    },
    password2: {
     type: String,
     trim: true,
     required : [true, 'Please add a Password'],
-    minlength: [6, 'password must have at least six(6) characters'],
+    minlength: [6, 'password must have at least four(4) characters'],
     },
     tokens:[
         {
