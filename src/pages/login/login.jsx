@@ -1,17 +1,23 @@
-import { useState,useContext } from "react";
-import { Link,useHistory } from "react-router-dom";
+import { useState,useContext,useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./login.css";
 import { UserContext } from "../../App";
 import axios from "axios";
 const Login = () => {
 
 	const {state, dispatch} = useContext(UserContext)
-	const history = useHistory()
 	const [formData, setFormData] = useState({
 		username: '',
 		password: ''
 		});
 	const { username, password } = formData;
+	
+	const [title, setTitle] = useState('TicketsPlease | Login');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
+
 	const onChange = e =>
 	setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -52,7 +58,7 @@ const Login = () => {
 							onChange={e => onChange(e)}
 							value={username}
 							required
-							className="input"
+							className="inputs"
 						/>
 						<input
 							type="password"
@@ -61,9 +67,9 @@ const Login = () => {
 							onChange={e => onChange(e)}
 							value={password}
 							required
-							className="input"
+							className="inputs"
 						/>
-						<button type="submit" className="green_btn">
+						<button type="submit" className="green_btns">
 							Sign in
 						</button>
 					</form>
@@ -71,9 +77,7 @@ const Login = () => {
 				<div className="right">
 					<h1>New Here ?</h1>
 					<Link to="/signup">
-						<button type="button" className="white_btn">
-							Sing Up
-						</button>
+						<span className="white_btns"> Register</span>
 					</Link>
 				</div>
 			</div>

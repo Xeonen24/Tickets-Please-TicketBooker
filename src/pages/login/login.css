@@ -10,7 +10,7 @@
 	width: 900px;
 	height: 500px;
 	display: flex;
-	border-radius: 10px;
+	border-radius: 2rem;
 	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
 		0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 }
@@ -33,19 +33,20 @@
 
 .form_container h1 {
 	font-size: 40px;
-	margin-top: 0;
 }
 
-.input {
-	outline: none;
-	border: none;
-	width: 370px;
-	padding: 15px;
-	border-radius: 10px;
-	margin: 5px 0;
-	font-size: 14px;
+.inputs {
+    outline: none;
+    border: none;
+	border-radius: 1rem;
+    width: 358px;
+    background-color: white;
 	color:black;
-
+	margin: 5px 0;
+	padding: 15px;
+    font-size: 14px;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .error_msg {
@@ -71,27 +72,39 @@
 }
 
 .right h1 {
-	margin-top: 0;
+	margin-bottom: 2rem;
 	color: white;
 	font-size: 40px;
 	align-self: center;
 }
 
-.white_btn,
-.green_btn {
+.white_btns{
+	border: none;
+	outline: none;
+	padding: 0.75rem 4rem;
+	background-color: gray;
+	border-radius: 2rem;
+	width: 180px;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+	color:white;
+	transition: all 0.3s ease;
+}
+.white_btns:hover{
+	background-color: rgb(133, 197, 37);
+}
+
+.green_btns {
+	background-color: #3bb19b;
+	color: white;
+	margin-right: 12rem;
 	border: none;
 	outline: none;
 	padding: 12px 0;
-	background-color: white;
 	border-radius: 20px;
 	width: 180px;
 	font-weight: bold;
 	font-size: 14px;
 	cursor: pointer;
-}
-
-.green_btn {
-	background-color: #3bb19b;
-	color: white;
-	margin: 10px;
 }

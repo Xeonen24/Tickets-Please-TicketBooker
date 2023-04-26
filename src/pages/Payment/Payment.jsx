@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './payment.css';
 
 const Payment = () => {
   const [amount, setAmount] = useState(localStorage.getItem('totalPrice') || '');
   const [isPaid, setIsPaid] = useState(false);
+
+  const [title, setTitle] = useState('TicketsPlease | Payment');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

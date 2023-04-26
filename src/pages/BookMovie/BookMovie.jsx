@@ -4,6 +4,11 @@ import './movie-card.scss';
 import MovieCarde from './MovieCarde';
 
 const BookMovie = (props) => {
+  const [title, setTitle] = useState('TicketsPlease | Booking');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
   
     return (
       <>

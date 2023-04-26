@@ -28,7 +28,12 @@ const Detail = () => {
         localStorage.setItem("bookingItemTitle", JSON.stringify(item.title || item.name));
         localStorage.setItem("bookingItemId", JSON.stringify(id));        
       }
-  
+      useEffect(() => {
+        if (item) {
+            document.title = "TicketsPlease | "+item.title || item.name;
+        }
+    }, [item]);
+
       if (loggedIN) {
           return (
               <>

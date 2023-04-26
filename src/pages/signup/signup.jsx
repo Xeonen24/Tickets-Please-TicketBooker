@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./signup.css";
@@ -11,6 +11,12 @@ const Signup = () => {
 		password2: ''
 	});
 	const { username, email, password, password2 } = formData;
+	const [title, setTitle] = useState('TicketsPlease | Signup');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
+  
 	const onChange = e =>
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	const onSubmit = async e => {
@@ -46,9 +52,7 @@ const Signup = () => {
 				<div className="left">
 					<h1>Welcome Back</h1>
 					<Link to="/login">
-						<button type="button" className="white_btn">
-							Sing in
-						</button>
+							<span className="white_btn">Sign In</span>
 					</Link>
 				</div>
 				<div className="right">

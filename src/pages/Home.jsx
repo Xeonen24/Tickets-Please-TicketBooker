@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { OutlineButton } from '../components/button/Button';
 import HeroSlide from '../components/hero-slide/HeroSlide';
@@ -9,6 +9,12 @@ import { loggedIN } from '../App';
 
 const Home = () => {
   const history = useHistory();
+
+  const [title, setTitle] = useState('TicketsPlease | Home');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
 
   useEffect(() => {
     const clearBookingData = () => {

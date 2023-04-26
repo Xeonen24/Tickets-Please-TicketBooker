@@ -11,9 +11,12 @@ const BookPage = () => {
   const history = useHistory();
   const [movie, setMovie] = useState(null);
   const [overview, setOverview] = useState('');
+  
+  const [title, setTitle] = useState('TicketsPlease | Booking');
 
-  const [amount, setAmount] = useState();
-  const [isPaid, setIsPaid] = useState(false);
+  useEffect(() => {
+	  document.title = title;
+	}, [title]);
 
   const selectSeat = (rowIndex, seatIndex, seatType) => {
     const selectedSeat = [rowIndex, seatIndex, seatType];

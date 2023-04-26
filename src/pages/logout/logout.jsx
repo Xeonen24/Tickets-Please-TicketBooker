@@ -1,10 +1,15 @@
-import React, {useContext } from 'react';
+import React, {useContext,useEffect,useState} from 'react';
 import axios from "axios";
 import { toast} from 'react-toastify';
 import { UserContext } from "../../App";
 
 const Logout = async() =>{
     const { state, dispatch } = useContext(UserContext);
+    const [title, setTitle] = useState('Logging out....');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
     try{
         const res = await axios.post('http://localhost:5000/api/logout');
             toast.success('Log out successfully');

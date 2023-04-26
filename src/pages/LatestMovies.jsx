@@ -15,6 +15,12 @@ const LatestMovies=(props)=> {
 
   const { keyword } = useParams();
 
+  const [title, setTitle] = useState('TicketsPlease | Latest Movies');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
+
   useEffect(() => {
       const getList = async () => {
           let response = null;

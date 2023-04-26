@@ -9,6 +9,12 @@ function TheatreSelect() {
   const [showTimes, setShowTimes] = useState([]);
   const [selectedShowTime, setSelectedShowTime] = useState('');
 
+  const [title, setTitle] = useState('TicketsPlease | Theatre Selection');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
+
   async function fetchLocation() {
     const response = await fetch(`https://nominatim.openstreetmap.org/search.php?city=${city}&format=json&addressdetails=1&limit=1`);
     const data = await response.json();

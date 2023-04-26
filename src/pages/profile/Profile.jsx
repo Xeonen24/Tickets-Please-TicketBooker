@@ -12,6 +12,12 @@ const Profile = () => {
 	});
   const {password, password2 } = formData;
 
+  const [title, setTitle] = useState('TicketsPlease | Profile');
+
+	useEffect(() => {
+	  document.title = title;
+	}, [title]);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/bookings", { withCredentials: true })
