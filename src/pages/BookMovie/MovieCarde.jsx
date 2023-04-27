@@ -68,7 +68,7 @@ const MovieCarde = (props) => {
   return (
     <>
     <PageHeader />
-    <h1 className='grid-test'>Ongoing</h1>
+    <h1 className='grid-test'>Ongoing Movies</h1>
     <div className="movie-grid">
         {
           items.map((item, i) => <ActualMovieCard movie={item} key={i} />)
@@ -77,7 +77,7 @@ const MovieCarde = (props) => {
        {
           page < totalPage ? (
             <div className="movie-grid__loadmore">
-              <OutlineButton className="small" onClick={loadMore}>Load more</OutlineButton>
+              <a className='green_btns2' onClick={loadMore}>Load more</a>
             </div>
           ) : null
         }

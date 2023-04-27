@@ -18,23 +18,27 @@ const BookPage = () => {
 	  document.title = title;
 	}, [title]);
 
-  const selectSeat = (rowIndex, seatIndex, seatType) => {
-    const selectedSeat = [rowIndex, seatIndex, seatType];
+  const selectSeat = (rowIndex, seatNumber, seatType) => {
+    const seatId = `${seatType}${seatNumber + 1}`;
+    const seat = [seatType, seatNumber + 1];
     const seatAlreadySelected = selectedSeats.some(
-      (seat) => JSON.stringify(seat) === JSON.stringify(selectedSeat)
+      (selectedSeat) =>
+        JSON.stringify(selectedSeat.slice(0, 2)) === JSON.stringify(seat)
     );
-
+  
     if (seatAlreadySelected) {
       const updatedSelectedSeats = selectedSeats.filter(
-        (seat) => JSON.stringify(seat) !== JSON.stringify(selectedSeat)
+        (selectedSeat) =>
+          JSON.stringify(selectedSeat.slice(0, 2)) !== JSON.stringify(seat)
       );
       setSelectedSeats(updatedSelectedSeats);
       setTotalPrice(totalPrice - getSeatPrice(seatType));
     } else {
-      setSelectedSeats([...selectedSeats, selectedSeat]);
+      setSelectedSeats([...selectedSeats, seat.concat(seatId)]);
       setTotalPrice(totalPrice + getSeatPrice(seatType));
     }
   };
+  
 
   const getSeatPrice = (seatType) => {
     if (seatType === "bronze") {
@@ -51,13 +55,17 @@ const BookPage = () => {
   const renderSeats = () => {
     const seats = [];
   
-    const columnCount = 10;
+    const rowCount = 7; // total number of rows
+    let seatNumber = 1; // initialize seat number
   
     const renderRow = (rowIndex, rowType) => {
       const rows = [];
   
-      for (let j = 0; j < columnCount; j++) {
-        const seatId = `${rowType}${j + 1}${rowIndex}`;
+      const seatCount = 10; // total number of seats in each row
+      const rowNumber = rowIndex + 1; // row number starting from 1
+  
+      for (let j = 0; j < seatCount; j++) {
+        const seatId = `${rowType}-${rowNumber}-${j + 1}`;
         const seat = [rowIndex, j, rowType, seatId];
         const seatSelected = selectedSeats.some(
           (selectedSeat) =>
@@ -78,26 +86,28 @@ const BookPage = () => {
                 selectedSeat.classList.add("selected");
               }
             }}
-          />
+          >
+          </div>
         );
+        seatNumber++; // increment seat number
       }
   
       seats.push(
         <div key={rowIndex} className="row">
+          <h5 className="subtitle">{`${rowType} row ${rowNumber}`}</h5>
           {rows}
-          <h5 className="subtitle">{`${rowType} row`}</h5>
         </div>
       );
     };
   
-    for (let i = 0; i <= 1; i++) {
-      renderRow(i, "bronze");
-    }
-      for (let i = 2; i <= 4; i++) {
-      renderRow(i, "silver");
-    }
-      for (let i = 5; i <= 6; i++) {
-      renderRow(i, "gold");
+    for (let i = 0; i < rowCount; i++) {
+      if (i <= 1) {
+        renderRow(i, "bronze");
+      } else if (i >= 2 && i <= 4) {
+        renderRow(i, "silver");
+      } else {
+        renderRow(i, "gold");
+      }
     }
   
     localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
@@ -105,6 +115,7 @@ const BookPage = () => {
   
     return seats;
   };
+  
   const handleConfirm = async () => {
     if (selectedSeats.length === 0) {
       alert("Please select at least one seat!");

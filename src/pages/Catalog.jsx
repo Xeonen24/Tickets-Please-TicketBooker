@@ -11,11 +11,13 @@ const Catalog = () => {
 
     const { category,categorys } = useParams();
     let headerText = '';
-    if (categorys === cate.movies) {
+    if (categorys === cate.movie) {
         headerText = 'Latest Movies';
     }else if(category === cate.movie){
+        document.title = `TicketsPlease | Trending Movies`
         headerText = 'Trending Movies';
     }else if (category === cate.tv) {
+        document.title = `TicketsPlease | TV Series`
         headerText = 'TV Series';
     }
 

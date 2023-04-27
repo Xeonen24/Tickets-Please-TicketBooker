@@ -9,7 +9,7 @@
     border-radius: 10px;
     margin-bottom: 1rem;
     transition: all 0.3s ease-out;
-    
+
     &:hover{
         transform: scale(1.03);
         .itemOverview{
@@ -21,14 +21,6 @@
 
     }
 
-    .btn {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        opacity: 0%;
-        transform: translate(-50%, -50%) scale(0);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
     .viewMore{
         font-size: 15px;
     }
@@ -77,4 +69,21 @@
         }
     }
 
+}
+.green_btns2 {
+    position: relative;
+    border: 0.1px transparent;
+    outline: none;
+    padding: 0.75rem 2.5rem;
+    bottom: 2rem;
+    border-radius: 20px;
+    width: 180px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    &:hover{
+        background-color: rgb(133, 197, 37);
+        color:white;
+    }
 }
