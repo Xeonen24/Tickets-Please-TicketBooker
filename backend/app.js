@@ -58,7 +58,7 @@ app.use(
 
 app.use(
   cors({
-    origin: ["https://tickets-please-ticket-booker-frontend.vercel.app","http://localhost:3000"],
+    origin: ["https://tickets-please-ticket-booker-frontend.vercel.app","http://localhost:3000","https://tickets-please-ticket-booker.vercel.app"],
     credentials: true,
     exposedHeaders: ['Authorization'],
   })
@@ -66,7 +66,6 @@ app.use(
 
 app.use("/api", Routes);
 
-// Error handling middleware should be defined here
 app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
