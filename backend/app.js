@@ -10,7 +10,6 @@ const cors = require("cors");
 const USER = require("./models/user");
 const BOOKING = require("./models/booking");
 const cookieParser = require("cookie-parser");
-app.use(cookieParser());
 const errorHandler = require("./middleware/error");
 const Routes = require("./routes/routes");
 const AdminJs = require("admin-bro");
@@ -30,29 +29,27 @@ mongoose
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err));
 
-// Set up the express session store
 const sessionStore = new MongoDBStore({
   uri: process.env.DATABASE,
   collection: "sessions",
 });
 
-// Catch errors
 sessionStore.on("error", (error) => {
   console.log(error);
 });
 
-// Set up the express session middleware
 app.use(
   session({
     secret: process.env.ADMIN_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      maxAge: 1000 * 60 * 60 * 24,
     },
     store: sessionStore,
   })
 );
+
 AdminJs.registerAdapter(AdminJsMongoose);
 
 const adminJs = new AdminJs({
@@ -167,15 +164,6 @@ const router = AdminJsExpress.buildAuthenticatedRouter(adminJs, {
   sessionStore,
 });
 
-app.use(
-  session({
-    secret: process.env.ADMIN_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: sessionStore,
-  })
-);
-
 app.use(adminJs.options.rootPath, router);
 
 app.use(morgan("dev"));
@@ -207,9 +195,8 @@ app.use(
 
 app.use("/api", Routes);
 
-app.use(errorHandler);
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  console.log(`App is running`);
+  console.log(`App is running on port ${port}`);
 });
