@@ -1,22 +1,18 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/user')
+const secretKey = process.env.JWT_SECRET; 
 
-const authen = async (req,res,next) =>{
-  try{
-    const token = req.cookies.jwtoken
-    const verifyToken = jwt.verify(token,process.env.JWT_SECRET)
-    const rootUser = await User.findOne({_id:verifyToken._id,"tokens:token":token})
-    if(!rootUser){
-      throw new Error('User does not exist')
-    }
-    req.token = token
-    req.rootUser = rootUser
-    req.userID = rootUser._id
-    next()
-  }catch(err){
-    res.status(401).send('Not authorized: No token available')
-    console.log(err)
+function auth(req, res, next) {
+  const token = req.headers.authorization;
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
+  jwt.verify(token.split(' ')[1], process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Token verification failed' });
+    }
+    req.user = decoded;
+    next();
+  });
 }
 
-module.exports = authen;
+module.exports = auth;

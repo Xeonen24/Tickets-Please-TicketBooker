@@ -39,7 +39,6 @@ const LatestMovies=(props)=> {
               response = await tmdbApi2.search(props.categorys, {params});
           }
           setItems(response.results);
-          console.log(response.results);
           setTotalPage(response.total_pages);
       }
       getList();

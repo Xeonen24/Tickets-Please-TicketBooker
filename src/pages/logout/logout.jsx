@@ -11,14 +11,21 @@ const Logout = async() =>{
 	  document.title = title;
 	}, [title]);
     try{
-        const res = await axios.post('http://localhost:5000/api/logout');
+        
+        const token = localStorage.getItem("jwtToken");
+        const response = await axios.post(
+            `${process.env.REACT_APP_URL}/api/logout`,
+            {
+              withCredentials: true,
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+              },
+            }
+          );
             toast.success('Log out successfully');
-            localStorage.removeItem('token');
+            localStorage.removeItem("jwtToken");
             dispatch({type:"USER",payload:false})
-            localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("data")
-            localStorage.removeItem('username')
-            document.cookie = "jwtoken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             window.location.href='/';
     }
     catch(error) {

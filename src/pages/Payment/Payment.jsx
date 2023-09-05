@@ -1,40 +1,43 @@
-import React, { useState,useEffect } from 'react';
-import './payment.css';
+import React, { useState, useEffect } from "react";
+import "./payment.css";
 
 const Payment = () => {
-  const [amount, setAmount] = useState(localStorage.getItem('totalPrice') || '');
+  const [amount, setAmount] = useState(
+    localStorage.getItem("totalPrice") || ""
+  );
   const [isPaid, setIsPaid] = useState(false);
+  const [title, setTitle] = useState("TicketsPlease | Payment");
 
-  const [title, setTitle] = useState('TicketsPlease | Payment');
-
-	useEffect(() => {
-	  document.title = title;
-	}, [title]);
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (amount === '') {
-      alert('Please enter an amount');
+    if (amount === "") {
+      alert("Please enter an amount");
     } else {
       var options = {
-        key: 'rzp_test_ZaBqur5zk4j0JC',
-        key_secret: 'T1VutDUqjsce2ZKfv04chR8O',
+        key: process.env.REACT_APP_RZPAYKEY,
+        key_secret: process.env.REACT_APP_RZPAYKEYSECRET,
         amount: amount * 100,
-        currency: 'INR',
-        name: 'TicketsPlease Merchant',
+        currency: "INR",
+        name: "TicketsPlease Merchant",
         handler: function (response) {
           setIsPaid(true);
-          alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+          alert(
+            "Payment successful! Payment ID: " + response.razorpay_payment_id
+          );
         },
         notify: {
           sms: true,
-          email: true
+          email: true,
         },
         notes: {
-          address: 'Alibag, 402201'
+          address: "Alibag, 402201",
         },
         theme: {
-          color: 'black'
+          color: "black",
         },
       };
       var pay = new window.Razorpay(options);
@@ -51,20 +54,20 @@ const Payment = () => {
           type="text"
           placeholder="Enter Amount"
           value={amount}
-          disabled='true'
+          disabled="true"
           onChange={(e) => setAmount(e.target.value)}
         />
         <br />
         <br />
-        {!isPaid ?
+        {!isPaid ? (
           <button onClick={handleSubmit}>Pay Now</button>
-          :
+        ) : (
           <input
             type="text"
             placeholder="Payment Status: Paid"
-            disabled='true'
+            disabled="true"
           />
-        }
+        )}
       </div>
     </div>
   );
