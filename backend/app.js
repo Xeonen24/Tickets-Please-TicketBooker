@@ -153,9 +153,6 @@ const adminJs = new AdminJs({
       },
     },
   },
-  dashboard: {
-    component: AdminJs.bundle("./components/admin-dashboard-component.jsx"),
-  },
 });
 
 const router = AdminJsExpress.buildAuthenticatedRouter(adminJs, {
