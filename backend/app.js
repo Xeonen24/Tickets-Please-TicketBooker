@@ -12,9 +12,6 @@ const BOOKING = require("./models/booking");
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./middleware/error");
 const Routes = require("./routes/routes");
-const AdminJs = require("admin-bro");
-const AdminJsExpress = require("@admin-bro/express");
-const AdminJsMongoose = require("@admin-bro/mongoose");
 
 const DEFAULT_ADMIN = {
   email: process.env.ADMIN_EMAIL,
@@ -50,122 +47,6 @@ app.use(
   })
 );
 
-AdminJs.registerAdapter(AdminJsMongoose);
-
-const adminJs = new AdminJs({
-  databases: [mongoose],
-  rootPath: "/admin",
-  logoutPath: "/admin/logout",
-  loginPath: "/admin/login",
-  branding: {
-    companyName: "TicketsPlease?",
-    logo: "",
-    softwareBrothers: false,
-  },
-  resources: [
-    {
-      resource: USER,
-      options: {
-        parent: {
-          name: "User Management",
-          icon: "User",
-        },
-        properties: {
-          _id: {
-            isVisible: { list: false, filter: true, show: true, edit: false },
-          },
-          email: {
-            isVisible: { list: true, filter: true, show: true, edit: false },
-          },
-          username: {
-            isTitle: true,
-          },
-          createdAt: {
-            isTitle: true,
-          },
-          tokens: {
-            isVisible: { list: false, filter: false, show: false, edit: false },
-          },
-          password: {
-            isVisible: { list: false, filter: false, show: true, edit: true },
-          },
-          password2: {
-            isVisible: { list: false, filter: false, show: true, edit: true },
-          },
-          isAdmin: {
-            isVisible: { list: true, filter: true, show: true, edit: true },
-          },
-        },
-      },
-    },
-    {
-      resource: BOOKING,
-      options: {
-        parent: {
-          name: "Bookings Management",
-          icon: "InventoryManagement",
-        },
-        properties: {
-          _id: {
-            isVisible: { list: false, filter: true, show: true, edit: false },
-          },
-          selectedSeats: {
-            isVisible: { list: false, filter: false, show: true, edit: false },
-          },
-          totalPrice: {
-            isVisible: { list: true, filter: false, show: true, edit: false },
-          },
-          bookingItemTitle: {
-            isVisible: { list: true, filter: true, show: true, edit: false },
-          },
-          bookingItemId: {
-            isVisible: { list: false, filter: false, show: true, edit: false },
-          },
-          selectedTheatre: {
-            isVisible: { list: false, filter: false, show: true, edit: false },
-          },
-          showTime: {
-            isVisible: { list: false, filter: false, show: true, edit: true },
-          },
-          isPaid: {
-            isVisible: { list: true, filter: true, show: true, edit: true },
-          },
-          user: {
-            isTitle: true,
-          },
-          paymentId: {
-            isVisible: { list: false, filter: false, show: true, edit: false },
-          },
-        },
-      },
-    },
-  ],
-  locale: {
-    translations: {
-      labels: {
-        loginWelcome: "Admin Panel Login",
-      },
-      messages: {
-        loginWelcome: "Please enter your administrative credentials",
-      },
-    },
-  },
-});
-
-const router = AdminJsExpress.buildAuthenticatedRouter(adminJs, {
-  authenticate: async (email, password) => {
-    if (email === DEFAULT_ADMIN.email && password === DEFAULT_ADMIN.password) {
-      return Promise.resolve(DEFAULT_ADMIN);
-    }
-    return null;
-  },
-  cookiePassword: process.env.ADMIN_COOKIE_PASSWORD,
-  cookieName: process.env.ADMIN_COOKIE_NAME,
-  sessionStore,
-});
-
-app.use(adminJs.options.rootPath, router);
-
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "100mb" }));
 app.use(
@@ -181,7 +62,8 @@ app.use(
       if (
         !origin ||
         origin === "http://localhost:3000" ||
-        origin === "http://localhost:5000"
+        origin === "http://localhost:5000" ||
+        origin === "https://tickets-please-ticket-booker.vercel.app"
       ) {
         callback(null, true);
       } else {
@@ -195,6 +77,8 @@ app.use(
 
 app.use("/api", Routes);
 
+// Error handling middleware should be defined here
+app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
