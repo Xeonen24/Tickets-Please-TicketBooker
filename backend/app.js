@@ -58,20 +58,9 @@ app.use(
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (
-        !origin ||
-        origin === "http://localhost:3000" ||
-        origin === "http://localhost:5000" ||
-        origin === "https://tickets-please-ticket-booker.vercel.app"
-      ) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: ["https://tickets-please-ticket-booker-frontend.vercel.app","http://localhost:3000"],
     credentials: true,
-    exposedHeaders: ["authorization"],
+    exposedHeaders: ['Authorization'],
   })
 );
 
