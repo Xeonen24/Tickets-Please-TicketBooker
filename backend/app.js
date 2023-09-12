@@ -58,7 +58,7 @@ app.use(
 
 app.use(
   cors({
-    origin: ["https://tickets-please-ticket-booker-frontend.vercel.app", "http://localhost:3000", "https://tickets-please-ticket-booker.vercel.app"],
+    origin: ["https://tickets-please.vercel.app", "http://localhost:3000", "https://tickets-please-ticket-booker.vercel.app"],
     credentials: true,
     exposedHeaders: ['Authorization'],
   })
